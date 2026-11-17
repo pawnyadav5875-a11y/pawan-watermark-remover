@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pawan Studio | Pro Video Watermark Remover</title>
+<style>
+:root{--bg:#070b14;--card:#101726;--card2:#162035;--line:#24314d;--txt:#f1f5f9;--mut:#94a3b8;--acc:#f43f5e;--pri:#6366f1;--ok:#10b981}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:radial-gradient(1000px 500px at 50% -10%,#1e1b4b 0%,var(--bg) 65%);color:var(--txt);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh}
+.nav{border-bottom:1px solid var(--line);background:rgba(16,23,38,.9);padding:12px 16px;position:sticky;top:0;z-index:50}
+.nav-in{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:800;font-size:1.1rem;display:flex;align-items:center;gap:8px}
+.badge{background:rgba(99,102,241,.2);color:#a5b4fc;border:1px solid rgba(99,102,241,.4);font-size:.72rem;padding:2px 8px;border-radius:99px;font-weight:700}
+.wrap{max-width:900px;margin:0 auto;padding:16px 14px 60px}
+.hero{text-align:center;padding:8px 0 16px}
+.hero h1{font-size:1.45rem;margin:0 0 6px}
+.hero p{color:var(--mut);font-size:.88rem;margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:14px}
+.sec-title{font-size:.9rem;font-weight:700;margin-bottom:10px;display:flex;justify-content:space-between}
+.upload-zone{border:2px dashed #334155;border-radius:14px;padding:24px 14px;text-align:center;background:rgba(22,32,53,.5);cursor:pointer;display:block}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:14px 18px;font-size:1rem;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--pri),#8b5cf6);cursor:pointer;width:100%}
+.btn.red{background:linear-gradient(135deg,#e11d48,#f97316)}
+.btn.green{background:linear-gradient(135deg,#059669,#10b981)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+input[type=file]{display:none}
+.stage{position:relative;width:100%;background:#000;border-radius:12px;overflow:hidden;line-height:0;user-select:none}
+.stage video{width:100%;display:block;max-height:66vh}
+.ov{position:absolute;inset:0;touch-action:none;pointer-events:none}
+.box{position:absolute;border:2px solid var(--acc);background:rgba(244,63,94,.25);touch-action:none;cursor:move;box-shadow:0 0 0 9999px rgba(0,0,0,.38);pointer-events:auto}
+.hd{position:absolute;width:24px;height:24px;background:var(--acc);border:2px solid #fff;border-radius:50%;touch-action:none}
+.hd[data-h=nw]{left:-12px;top:-12px}.hd[data-h=ne]{right:-12px;top:-12px}.hd[data-h=sw]{left:-12px;bottom:-12px}.hd[data-h=se]{right:-12px;bottom:-12px}
+.presets{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+.pbtn{background:var(--card2);border:1px solid var(--line);color:#e2e8f0;padding:8px;border-radius:10px;font-size:.8rem;font-weight:600;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px}
+@media(max-width:520px){.grid{grid-template-columns:1fr}}
+label.l{display:flex;justify-content:space-between;font-size:.84rem;color:var(--mut)}
+label.l b{color:var(--txt)}
+input[type=range]{width:100%;accent-color:var(--acc);height:26px}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mode{border:1px solid var(--line);border-radius:12px;padding:10px;cursor:pointer;font-size:.86rem;background:var(--card2);display:block}
+.mode.sel{border-color:var(--pri);background:rgba(99,102,241,.16)}
+.mode small{display:block;color:var(--mut);font-size:.76rem}
+.bar{height:14px;background:#070b14;border-radius:99px;overflow:hidden;border:1px solid var(--line)}
+.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pri),var(--ok));transition:width .2s}
+.msg{font-size:.85rem;margin-top:8px;color:var(--mut)}
+.err{color:#fda4af;background:#2e1018;border:1px solid #881337;padding:10px;border-radius:10px;margin-top:10px;font-size:.86rem}
+.warn{color:#fde68a;background:#29200e;border:1px solid #78350f;padding:10px;border-radius:10px;margin-bottom:12px;font-size:.85rem}
+.hide{display:none}
+.row{display:flex;gap:12px;align-items:center;margin-top:12px}
+.compare{margin-top:14px;border-top:1px solid var(--line);padding-top:14px}
+.compare video{width:100%;border-radius:12px;border:1px solid var(--ok);max-height:60vh}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in"><div class="brand">🎬 Pawan Studio <span class="badge">PRO FREE</span></div><div style="font-size:.8rem;color:var(--mut)">Unlimited Length</div></div></nav>
+<div class="wrap">
+  <div class="hero">
+    <h1>Video Watermark Remover</h1>
+    <p>किसी भी लंबाई के वीडियो से वॉटरमार्क हटाएं — 100% Free & No Server Upload</p>
+  </div>
+  <div id="isoWarn" class="warn hide"></div>
+  <div class="card">
+    <label class="upload-zone" for="file"><strong style="font-size:1.05rem">📁 वीडियो चुनें / Select Video</strong><div style="color:var(--mut);font-size:.8rem;margin-top:4px">MP4, MOV, MKV, WEBM</div></label>
+    <input id="file" type="file" accept="video/*">
+    <div id="fname" class="msg" style="text-align:center;color:#a5b4fc;font-weight:600"></div>
+  </div>
+  <div id="editor" class="hide">
+    <div class="card">
+      <div class="sec-title"><span>1. वॉटरमार्क पर बॉक्स सेट करें</span><span id="dim" style="font-size:.78rem;color:var(--mut)"></span></div>
+      <div class="stage"><video id="video" controls playsinline preload="metadata"></video><div class="ov"><div class="box" id="box"><div class="hd" data-h="nw"></div><div class="hd" data-h="ne"></div><div class="hd" data-h="sw"></div><div class="hd" data-h="se"></div></div></div></div>
+      <div class="presets">
+        <button type="button" class="pbtn" data-pos="br">↘️ नीचे दाएं</button>
+        <button type="button" class="pbtn" data-pos="bl">↙️ नीचे बाएं</button>
+        <button type="button" class="pbtn" data-pos="tr">↗️ ऊपर दाएं</button>
+        <button type="button" class="pbtn" data-pos="tl">↖️ ऊपर बाएं</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sec-title"><span>2. बारीक एडजस्टमेंट</span></div>
+      <div class="grid">
+        <div><label class="l"><span>X (Left)</span><b id="vx">0</b></label><input id="sx" type="range"></div>
+        <div><label class="l"><span>Y (Top)</span><b id="vy">0</b></label><input id="sy" type="range"></div>
+        <div><label class="l"><span>Width</span><b id="vw">0</b></label><input id="sw" type="range"></div>
+        <div><label class="l"><span>Height</span><b id="vh">0</b></label><input id="sh" type="range"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sec-title"><span>3. रिमूवल मोड और स्पीड</span></div>
+      <div class="modes" style="margin-bottom:10px">
+        <label class="mode sel"><input type="radio" name="mode" value="delogo" checked>✨ Smooth Blend<small>आस-पास के रंगों से मिलाएं</small></label>
+        <label class="mode"><input type="radio" name="mode" value="blur">💧 Clean Blur<small>वॉटरमार्क को ब्लर करें</small></label>
+      </div>
+      <div class="modes">
+        <label class="mode sel"><input type="radio" name="speed" value="ultrafast" checked>⚡ Super Fast<small>तेज़ प्रोसेसिंग</small></label>
+        <label class="mode"><input type="radio" name="speed" value="fast">💎 High Quality<small>बेहतर क्वालिटी</small></label>
+      </div>
+    </div>
+    <div class="card">
+      <button class="btn red" id="go">🚀 वॉटरमार्क हटाएं / Remove Watermark</button>
+      <div class="row"><div style="flex:1"><div class="bar"><i id="pb"></i></div><div class="msg" id="status">तैयार है / Ready</div></div><div id="pct" style="min-width:48px;text-align:right;font-weight:800;color:#a5b4fc">0%</div></div>
+      <div id="err" class="err hide"></div>
+      <div id="done" class="compare hide">
+        <div class="sec-title" style="color:var(--ok)"><span>✅ साफ वीडियो तैयार है</span></div>
+        <video id="outVideo" controls playsinline></video>
+        <div style="margin-top:12px"><a id="dl" class="btn green" style="text-decoration:none">⬇️ साफ MP4 डाउनलोड करें</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js" crossorigin="anonymous"></script>
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id),CORE="https://unpkg.com/@ffmpeg/core@0.11.0/dist/ffmpeg-core.js",M=2,MAX=2*1024*1024*1024-67108864;
+const S={file:null,url:null,vw:0,vh:0,x:0,y:0,w:0,h:0,ff:null,busy:false,outUrl:null},logs=[],video=$("video"),box=$("box");
+if(typeof SharedArrayBuffer==="undefined"||!window.crossOriginIsolated){$("isoWarn").textContent="⚠️ Chrome ब्राउज़र का उपयोग करें या पेज रीलोड करें।";$("isoWarn").classList.remove("hide")}
+const cl=(v,a,b)=>Math.min(Math.max(v,a),b),minW=()=>Math.min(16,Math.max(2,S.vw-2*M)),minH=()=>Math.min(16,Math.max(2,S.vh-2*M));
+function clampBox(){const mw=Math.max(2,S.vw-2*M),mh=Math.max(2,S.vh-2*M);S.w=Math.round(cl(S.w,minW(),mw));S.h=Math.round(cl(S.h,minH(),mh));S.x=Math.round(cl(S.x,M,S.vw-M-S.w));S.y=Math.round(cl(S.y,M,S.vh-M-S.h))}
+function render(){if(!S.vw||!video.clientWidth)return;const k=video.clientWidth/S.vw;box.style.left=(S.x*k)+"px";box.style.top=(S.y*k)+"px";box.style.width=(S.w*k)+"px";box.style.height=(S.h*k)+"px";$("sx").value=S.x;$("sy").value=S.y;$("sw").value=S.w;$("sh").value=S.h;$("vx").textContent=S.x+"px";$("vy").textContent=S.y+"px";$("vw").textContent=S.w+"px";$("vh").textContent=S.h+"px"}
+function setupSliders(){const set=(id,a,b)=>{const e=$(id);e.min=a;e.max=b;e.step=1};set("sx",M,S.vw-M-minW());set("sy",M,S.vh-M-minH());set("sw",minW(),S.vw-2*M);set("sh",minH(),S.vh-2*M);$("dim").textContent=S.vw+"×"+S.vh}
+document.querySelectorAll(".pbtn").forEach(b=>b.addEventListener("click",()=>{if(!S.vw)return;const p=b.dataset.pos;S.w=Math.round(S.vw*.24);S.h=Math.round(S.vh*.11);const px=Math.round(S.vw*.02),py=Math.round(S.vh*.02);if(p==="br"){S.x=S.vw-S.w-px;S.y=S.vh-S.h-py}if(p==="bl"){S.x=px;S.y=S.vh-S.h-py}if(p==="tr"){S.x=S.vw-S.w-px;S.y=py}if(p==="tl"){S.x=px;S.y=py}clampBox();render()}));
+["sx","sy","sw","sh"].forEach(id=>$(id).addEventListener("input",e=>{S[{sx:"x",sy:"y",sw:"w",sh:"h"}[id]]=parseInt(e.target.value,10)||0;clampBox();render()}));
+document.querySelectorAll('input[name=mode],input[name=speed]').forEach(r=>r.addEventListener("change",()=>document.querySelectorAll(`input[name=${r.name}]`).forEach(x=>x.parentElement.classList.toggle("sel",x.checked))));
+const showErr=t=>{$("err").textContent="❌ "+t;$("err").classList.remove("hide")},clearErr=()=>{$("err").classList.add("hide")},setProg=(p,t)=>{p=cl(Math.round(p),0,100);$("pb").style.width=p+"%";$("pct").textContent=p+"%";if(t!==undefined)$("status").textContent=t};
+$("file").addEventListener("change",e=>{const f=e.target.files&&e.target.files[0];if(!f)return;clearErr();$("done").classList.add("hide");setProg(0,"तैयार है");if(f.size>MAX){showErr("फ़ाइल 2GB से बड़ी है।");return}S.file=f;$("fname").textContent="🎞️ "+f.name+" ("+(f.size/1048576).toFixed(1)+" MB)";if(S.url)URL.revokeObjectURL(S.url);S.url=URL.createObjectURL(f);video.src=S.url;$("editor").classList.remove("hide")});
+video.addEventListener("loadedmetadata",()=>{S.vw=video.videoWidth;S.vh=video.videoHeight;S.w=Math.round(S.vw*.24);S.h=Math.round(S.vh*.11);S.x=S.vw-S.w-Math.round(S.vw*.02);S.y=S.vh-S.h-Math.round(S.vh*.02);setupSliders();clampBox();render()});
+window.addEventListener("resize",render);video.addEventListener("loadeddata",render);
+let drag=null;box.addEventListener("pointerdown",e=>{if(S.busy)return;drag={mode:(e.target.dataset&&e.target.dataset.h)||"move",sx:e.clientX,sy:e.clientY,ox:S.x,oy:S.y,ow:S.w,oh:S.h};try{box.setPointerCapture(e.pointerId)}catch(_){}e.preventDefault()});
+box.addEventListener("pointermove",e=>{if(!drag||!video.clientWidth)return;const k=S.vw/video.clientWidth,dx=(e.clientX-drag.sx)*k,dy=(e.clientY-drag.sy)*k,m=drag.mode;let L=drag.ox,T=drag.oy,R=drag.ox+drag.ow,B=drag.oy+drag.oh;if(m==="move"){L=cl(drag.ox+dx,M,S.vw-M-drag.ow);T=cl(drag.oy+dy,M,S.vh-M-drag.oh);R=L+drag.ow;B=T+drag.oh}else{if(m.indexOf("w")>=0)L=cl(drag.ox+dx,M,R-minW());if(m.indexOf("e")>=0)R=cl(drag.ox+drag.ow+dx,L+minW(),S.vw-M);if(m.indexOf("n")>=0)T=cl(drag.oy+dy,M,B-minH());if(m.indexOf("s")>=0)B=cl(drag.oy+drag.oh+dy,T+minH(),S.vh-M)}S.x=Math.round(L);S.y=Math.round(T);S.w=Math.round(R-L);S.h=Math.round(B-T);clampBox();render();e.preventDefault()});
+const endDrag=()=>{drag=null};box.addEventListener("pointerup",endDrag);box.addEventListener("pointercancel",endDrag);
+async function loadFF(){if(S.ff)return S.ff;const ff=FFmpeg.createFFmpeg({log:true,corePath:CORE});ff.setLogger(({message})=>{logs.push(String(message));if(logs.length>30)logs.shift()});await ff.load();S.ff=ff;return ff}
+function buildArgs(inName,outName,audioArgs){clampBox();const{x,y,w,h}=S,mode=document.querySelector('input[name=mode]:checked').value,preset=document.querySelector('input[name=speed]:checked').value,crf=preset==="fast"?"20":"23",even="scale=trunc(iw/2)*2:trunc(ih/2)*2";let args;if(mode==="delogo"){args=["-i",inName,"-vf",`delogo=x=${x}:y=${y}:w=${w}:h=${h},${even}`,"-map","0:v:0","-map","0:a?"]}else{const bw=Math.max(2,w-(w%2)),bh=Math.max(2,h-(h%2)),bx=x-(x%2),by=y-(y%2),r=cl(Math.floor(Math.min(bw,bh)/4),1,12),fc=`[0:v:0]split[a][b];[b]crop=${bw}:${bh}:${bx}:${by},boxblur=${r}:2[c];[a][c]overlay=${bx}:${by},${even}[v]`;args=["-i",inName,"-filter_complex",fc,"-map","[v]","-map","0:a?"]}return args.concat(["-c:v","libx264","-preset",preset,"-crf",crf,"-pix_fmt","yuv420p"],audioArgs,["-sn","-y",outName])}
+const fileSize=(ff,n)=>{try{return ff.FS("stat",n).size||0}catch(_){return 0}},safeUnlink=(ff,n)=>{try{ff.FS("unlink",n)}catch(_){}};
+$("go").addEventListener("click",async()=>{if(S.busy||!S.file)return;S.busy=true;clearErr();$("done").classList.add("hide");$("go").disabled=true;logs.length=0;let ff=null,inName="",outName="output.mp4";try{setProg(4,"इंजन लोड हो रहा है…");ff=await loadFF();const ext=((S.file.name.match(/\.([a-z0-9]{2,4})$/i)||[])[1]||"mp4").toLowerCase();inName="input."+ext;setProg(8,"फ़ाइल तैयार हो रही है…");ff.FS("writeFile",inName,await FFmpeg.fetchFile(S.file));ff.setProgress(({ratio})=>{if(typeof ratio==="number"&&isFinite(ratio))setProg(10+cl(ratio,0,1)*88,"वॉटरमार्क हटाया जा रहा है…")});setProg(10,"प्रोसेसिंग शुरू…");let ok=false;try{await ff.run.apply(ff,buildArgs(inName,outName,["-c:a","copy"]))}catch(_){}ok=fileSize(ff,outName)>1024;if(!ok){safeUnlink(ff,outName);try{await ff.run.apply(ff,buildArgs(inName,outName,["-c:a","aac","-b:a","160k"]))}catch(_){}ok=fileSize(ff,outName)>1024}if(!ok)throw new Error("प्रोसेसिंग विफल रही। बॉक्स थोड़ा छोटा करके फिर से करें।");setProg(99,"सेव हो रहा है…");const data=ff.FS("readFile",outName);if(S.outUrl)URL.revokeObjectURL(S.outUrl);S.outUrl=URL.createObjectURL(new Blob([data.buffer],{type:"video/mp4"}));$("outVideo").src=S.outUrl;$("dl").href=S.outUrl;$("dl").download=(S.file.name.replace(/\.[^.]+$/,"")||"video")+"_clean.mp4";$("done").classList.remove("hide");setProg(100,"✅ काम पूरा हुआ!")}catch(err){showErr((err&&err.message)||String(err));setProg(0,"रुका हुआ")}finally{if(ff){if(inName)safeUnlink(ff,inName);safeUnlink(ff,outName)}S.busy=false;$("go").disabled=false}});
+})();
+</script>
+</body>
+  </html>
+  
