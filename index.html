@@ -1,393 +1,287 @@
 <!DOCTYPE html>
 <html lang="en-IN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
-  <meta name="theme-color" content="#090b14">
-  <meta name="color-scheme" content="dark">
-  <meta name="author" content="Pawan Studio">
-  <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="google-site-verification" content="PASTE_GOOGLE_CODE_HERE" />
-  <meta name="description" content="Pawan Studio - Free online AI-style video and photo watermark remover. Automatically detect and remove watermark from videos and photos without blurry patches. Video se watermark kaise hataye.">
-  <meta name="keywords" content="video watermark remover, photo watermark remover, online watermark remover, free watermark remover, AI watermark remover, remove watermark from video, remove watermark from photo, video se watermark kaise hataye, photo se watermark kaise hataye, bina app ke watermark hataye, watermark hatane wala website, Pawan Studio">
-  <link rel="canonical" href="https://pawan-watermark-remover-1.onrender.com/">
-  <title>Pawan Studio - Auto AI Video & Photo Watermark Remover Online</title>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Pawan Studio - Auto AI Watermark Remover",
-    "url": "https://pawan-watermark-remover-1.onrender.com/",
-    "applicationCategory": "MultimediaApplication",
-    "operatingSystem": "Android, iOS, Windows, macOS, Linux",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
-    "author": { "@type": "Organization", "name": "Pawan Studio" }
-  }
-  </script>
-
-  <style>
-    :root {
-      --bg: #090b14; --panel: #111522; --panel2: #171d2d; --border: #293249;
-      --text: #f3f5ff; --muted: #919bb2; --accent: #8b5cf6; --accent2: #06b6d4; --green: #22c55e;
-    }
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    body {
-      margin: 0; min-height: 100vh; color: var(--text);
-      background: radial-gradient(ellipse at 50% 0%, #22204b 0, transparent 45%), var(--bg);
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.55;
-    }
-    .container { width: min(960px, calc(100% - 26px)); margin: auto; }
-    header {
-      position: sticky; top: 0; z-index: 30; background: rgba(9,11,20,.92);
-      border-bottom: 1px solid rgba(255,255,255,.08); backdrop-filter: blur(14px);
-    }
-    .nav { min-height: 60px; display: flex; justify-content: space-between; align-items: center; }
-    .brand { display: flex; align-items: center; gap: 9px; font-size: 19px; font-weight: 850; }
-    .brand-icon {
-      width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2)); font-size: 18px;
-    }
-    .nav-tag {
-      color: #a5f3fc; background: rgba(22,78,99,.35); border: 1px solid #155e75;
-      border-radius: 99px; padding: 4px 11px; font-size: 11px; font-weight: 700;
-    }
-    .hero { text-align: center; padding: 28px 0 18px; }
-    h1 { font-size: clamp(24px, 5vw, 40px); line-height: 1.18; margin: 0 0 10px; }
-    .gradient { background: linear-gradient(90deg, #a78bfa, #67e8f9); -webkit-background-clip: text; color: transparent; }
-    .hero p { color: var(--muted); max-width: 620px; margin: auto; font-size: 14px; }
-    .studio {
-      background: linear-gradient(145deg, #12182a, #0f1422); border: 1px solid var(--border);
-      border-radius: 20px; padding: 16px; box-shadow: 0 20px 60px rgba(0,0,0,.45); margin-bottom: 24px;
-    }
-    .tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
-    .tab {
-      border: 1px solid var(--border); background: #171d2b; color: #aab4c8;
-      padding: 12px; border-radius: 12px; font: 750 15px inherit; cursor: pointer;
-    }
-    .tab.active { background: linear-gradient(135deg, #4c1d95, #2563eb); color: #fff; border-color: #8b5cf6; }
-    .upload {
-      position: relative; border: 2px dashed #6366f1; border-radius: 16px; background: #171d2a;
-      min-height: 155px; display: flex; align-items: center; justify-content: center;
-      text-align: center; padding: 20px; overflow: hidden; cursor: pointer;
-    }
-    .upload input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 5; font-size: 100px; }
-    .upload h3 { margin: 6px 0 4px; font-size: 17px; }
-    .upload p { margin: 0; font-size: 12px; color: var(--muted); }
-    .file-info { margin-top: 10px; font-size: 12px; color: #a5b4fc; text-align: center; font-weight: 600; }
-    .workspace { display: none; margin-top: 16px; }
-    .workspace.show { display: block; }
-    .preview-wrap { background: #05070d; border: 1px solid var(--border); border-radius: 14px; padding: 10px; }
-    .preview-stage {
-      width: 100%; min-height: 140px; max-height: 520px; position: relative;
-      display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 9px; background: #0a0e1a;
-    }
-    #photoPreview, #videoPreview, #outputCanvas { display: none; max-width: 100%; max-height: 500px; object-fit: contain; }
-    #photoPreview.visible, #videoPreview.visible, #outputCanvas.visible { display: block; }
-    #selectionLayer {
-      position: absolute; border: 2px solid #22d3ee; background: rgba(34,211,238,.18);
-      box-shadow: 0 0 0 9999px rgba(5,7,13,.45); display: none; touch-action: none; cursor: move;
-    }
-    #selectionLayer.active { display: block; }
-    #selectionHandle {
-      position: absolute; right: -3px; bottom: -3px; width: 26px; height: 26px;
-      background: #22d3ee; border-radius: 6px 0 0 0; cursor: nwse-resize; touch-action: none;
-    }
-    .preview-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); padding: 8px 2px 0; }
-    .options { margin-top: 14px; padding: 14px; background: #171d2b; border: 1px solid var(--border); border-radius: 13px; }
-    .option-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 9px 0; font-size: 12px; color: #c5cde0; }
-    .option-row input[type=range] { width: 45%; accent-color: #a78bfa; }
-    .option-row input[type=checkbox] { accent-color: #8b5cf6; width: 18px; height: 18px; }
-    .controls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-    .btn {
-      border: 1px solid var(--border); border-radius: 11px; padding: 12px 14px;
-      background: #1b2335; color: #fff; font: 700 13px inherit; flex: 1; cursor: pointer;
-    }
-    .btn.primary { background: linear-gradient(110deg, #7c3aed, #2563eb); border: 0; }
-    .btn.danger { background: #4c1d2a; border-color: #7f1d1d; }
-    .progress-area { display: none; margin-top: 14px; }
-    .progress-area.show { display: block; }
-    .progress-top { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px; }
-    .progress-track { height: 9px; border-radius: 20px; background: #293249; overflow: hidden; }
-    .progress-bar { height: 100%; width: 0; background: linear-gradient(90deg, #8b5cf6, #06b6d4); transition: width .15s; }
-    .status { margin-top: 8px; font-size: 12px; color: #a5b4fc; text-align: center; font-weight: 600; }
-    .result { display: none; margin-top: 16px; border: 1px solid #166534; border-radius: 14px; padding: 14px; background: #10251b; }
-    .result.show { display: block; }
-    .result h3 { margin: 0 0 6px; color: #86efac; font-size: 15px; }
-    .result video, .result img { width: 100%; max-height: 460px; object-fit: contain; border-radius: 10px; margin: 10px 0; display: block; background: #000; }
-    .result a {
-      display: block; text-align: center; margin-top: 8px; background: #15803d; color: #fff;
-      text-decoration: none; border-radius: 10px; padding: 13px; font-weight: 800; font-size: 14px;
-    }
-    footer { margin-top: 30px; padding: 20px 0; text-align: center; border-top: 1px solid var(--border); color: var(--muted); font-size: 11px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="index,follow">
+<meta name="google-site-verification" content="PASTE_GOOGLE_CODE_HERE" />
+<meta name="description" content="Pawan Studio - Free online Auto AI video and photo watermark remover. Remove watermark from video and photo in seconds without blurry patches.">
+<meta name="keywords" content="video watermark remover, photo watermark remover, free watermark remover, video se watermark kaise hataye, photo se watermark kaise hataye, bina app ke watermark hataye, Pawan Studio">
+<link rel="canonical" href="https://pawan-watermark-remover-1.onrender.com/">
+<title>Pawan Studio - Auto AI Video & Photo Watermark Remover</title>
+<style>
+:root{--bg:#090b14;--card:#111625;--card2:#182036;--line:#283452;--txt:#f8fafc;--mut:#94a3b8;--pri:#7c3aed;--acc:#06b6d4;--ok:#16a34a}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:radial-gradient(800px 400px at 50% -10%,#251e54 0,var(--bg) 65%);color:var(--txt);font-family:system-ui,-apple-system,sans-serif;line-height:1.5}
+.w{max-width:860px;margin:auto;padding:14px 14px 50px}
+header{background:rgba(9,11,20,.92);border-bottom:1px solid var(--line);padding:12px 16px;position:sticky;top:0;z-index:20}
+.nav{max-width:860px;margin:auto;display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:18px}
+.tag{font-size:11px;background:#164e6366;color:#67e8f9;border:1px solid #155e75;padding:3px 10px;border-radius:99px}
+.hero{text-align:center;padding:18px 0 14px}
+.hero h1{font-size:25px;margin:0 0 6px}
+.hero p{color:var(--mut);font-size:13px;margin:0}
+.box-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;margin-bottom:14px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.tab{border:1px solid var(--line);background:var(--card2);color:var(--mut);padding:12px;border-radius:12px;font:750 15px inherit;cursor:pointer}
+.tab.on{background:linear-gradient(135deg,#6d28d9,#2563eb);color:#fff;border-color:transparent}
+.drop{position:relative;border:2px dashed #6366f1;border-radius:15px;background:var(--card2);padding:26px 14px;text-align:center;overflow:hidden;cursor:pointer}
+.drop input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:5;font-size:100px}
+.info{text-align:center;font-size:12px;color:#a5b4fc;margin-top:8px;font-weight:600}
+.stage{position:relative;background:#000;border-radius:12px;overflow:hidden;display:flex;justify-content:center;align-items:center;min-height:140px}
+.stage img,.stage video,.stage canvas{max-width:100%;max-height:500px;display:none;object-fit:contain}
+.stage .vis{display:block}
+.sel{position:absolute;border:2px solid #22d3ee;background:rgba(34,211,238,.2);box-shadow:0 0 0 9999px rgba(0,0,0,.45);display:none;touch-action:none;cursor:move}
+.sel.on{display:block}
+.hd{position:absolute;right:-3px;bottom:-3px;width:26px;height:26px;background:#22d3ee;border-radius:6px 0 0 0;touch-action:none;cursor:nwse-resize}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:10px 0;font-size:12px;color:#cbd5e1}
+.row input[type=range]{width:46%;accent-color:#8b5cf6}
+.btns{display:flex;gap:8px;margin-top:12px}
+.btn{flex:1;padding:12px;border-radius:11px;border:1px solid var(--line);background:var(--card2);color:#fff;font:700 13px inherit;cursor:pointer}
+.btn.pri{background:linear-gradient(110deg,#7c3aed,#2563eb);border:0}
+.btn.red{background:#4c1d2a;border-color:#7f1d1d}
+.bar{height:9px;background:#090b14;border-radius:99px;overflow:hidden;margin-top:12px;border:1px solid var(--line)}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#8b5cf6,#06b6d4);transition:width .15s}
+.st{text-align:center;font-size:12px;color:#a5b4fc;margin:8px 0 0;font-weight:600}
+.res{margin-top:14px;padding:14px;background:#0f291e;border:1px solid #166534;border-radius:14px}
+.res img,.res video{width:100%;max-height:460px;object-fit:contain;border-radius:10px;display:block;background:#000;margin:8px 0}
+.dl{display:block;text-align:center;background:var(--ok);color:#fff;text-decoration:none;padding:13px;border-radius:10px;font-weight:800;font-size:14px;margin-top:8px}
+.hide{display:none!important}
+</style>
 </head>
 <body>
-<header>
-  <div class="container nav">
-    <div class="brand"><div class="brand-icon">✦</div>Pawan <span style="color:#a78bfa">Studio</span></div>
-    <div class="nav-tag">AUTO AI • FREE</div>
+<header><div class="nav"><div>✦ Pawan <span style="color:#a78bfa">Studio</span></div><div class="tag">AUTO AI • LIVE</div></div></header>
+<div class="w">
+  <div class="hero">
+    <h1>Auto AI Video &amp; Photo Watermark Remover</h1>
+    <p>फ़ोटो या वीडियो चुनते ही वॉटरमार्क अपने आप साफ होकर डाउनलोड के लिए तैयार हो जाएगा</p>
   </div>
-</header>
 
-<main class="container">
-  <section class="hero">
-    <h1>Auto AI Video &amp; Photo <span class="gradient">Watermark Remover</span></h1>
-    <p>फ़ोटो या वीडियो चुनते ही वॉटरमार्क अपने आप स्कैन होकर साफ हो जाएगा — बिना धुंधले धब्बे के।</p>
-  </section>
-
-  <section class="studio">
+  <div class="box-card">
     <div class="tabs">
-      <button class="tab active" id="photoTab" type="button">📷 Photo Remover</button>
-      <button class="tab" id="videoTab" type="button">🎬 Video Remover</button>
+      <button class="tab on" id="tImg" type="button">📷 Photo Remover</button>
+      <button class="tab" id="tVid" type="button">🎬 Video Remover</button>
     </div>
 
-    <div class="upload" id="dropZone">
+    <div class="drop">
       <div style="pointer-events:none">
-        <div style="font-size:36px">☁️</div>
-        <h3 id="uploadTitle">Choose Your Photo</h3>
-        <p id="uploadDescription">यहाँ टैप करके फोटो चुनें — तुरंत ऑटो-रिमूव शुरू होगा</p>
+        <div style="font-size:34px">☁️</div>
+        <strong id="uTit" style="font-size:16px">Choose Your Photo</strong>
+        <div id="uSub" style="font-size:12px;color:var(--mut);margin-top:4px">यहाँ टैप करके फोटो चुनें — तुरंत ऑटो-रिमूव शुरू होगा</div>
       </div>
-      <input id="fileInput" type="file" accept="image/*">
+      <input id="fIn" type="file" accept="image/*">
     </div>
+    <div class="info" id="fInf"></div>
 
-    <div class="file-info" id="fileInfo"></div>
-
-    <div class="workspace" id="workspace">
-      <div class="preview-wrap">
-        <div class="preview-stage" id="previewStage">
-          <img id="photoPreview" alt="Preview">
-          <video id="videoPreview" playsinline controls muted></video>
-          <canvas id="outputCanvas"></canvas>
-          <div id="selectionLayer"><div id="selectionHandle"></div></div>
-        </div>
-        <div class="preview-label">
-          <span id="previewType">Auto-Detected Zone</span>
-          <span id="dimensions"></span>
-        </div>
+    <div id="work" class="hide" style="margin-top:14px">
+      <div class="stage" id="stg">
+        <img id="pImg" alt="Photo">
+        <video id="pVid" playsinline controls muted></video>
+        <canvas id="outC"></canvas>
+        <div class="sel" id="sel"><div class="hd" id="hd"></div></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--mut);margin-top:6px">
+        <span id="zLbl">Auto-Detected Zone</span><span id="dim"></span>
       </div>
 
-      <div class="options">
-        <div class="option-row">
-          <label for="threshold">Detection Sensitivity (सटीकता)</label>
-          <input id="threshold" type="range" min="15" max="90" value="38">
-          <span id="thresholdValue">38</span>
-        </div>
-        <div class="option-row">
-          <label for="grain">Natural Texture (शार्पनेस)</label>
-          <input id="grain" type="range" min="0" max="100" value="30">
-          <span id="grainValue">30%</span>
-        </div>
-        <div class="option-row">
-          <label for="manualToggle">Manual Box दिखाएं (जगह बदलें)</label>
-          <input type="checkbox" id="manualToggle">
-        </div>
-        <div class="option-row">
-          <label for="preserveAudio">Video में आवाज़ (Audio) रखें</label>
-          <input type="checkbox" id="preserveAudio" checked>
-        </div>
+      <div style="background:var(--card2);padding:12px;border-radius:12px;margin-top:12px;border:1px solid var(--line)">
+        <div class="row"><span>Sensitivity (सटीकता)</span><input id="sens" type="range" min="15" max="90" value="38"><b id="vSens">38</b></div>
+        <div class="row"><span>Texture Sharpness</span><input id="grn" type="range" min="0" max="100" value="30"><b id="vGrn">30%</b></div>
+        <div class="row"><span>Manual Box दिखाएं (जगह बदलें)</span><input id="mChk" type="checkbox" style="width:18px;height:18px"></div>
+        <div class="row"><span>Video में Audio रखें</span><input id="aChk" type="checkbox" checked style="width:18px;height:18px"></div>
       </div>
 
-      <div class="controls">
-        <button class="btn primary" id="autoBtn" type="button">✦ Re-Scan &amp; Clean</button>
-        <button class="btn" id="manualBtn" type="button">▣ Manual Box</button>
-        <button class="btn danger" id="resetBtn" type="button">↺ Reset</button>
+      <div class="btns">
+        <button class="btn pri" id="bRun" type="button">✦ Re-Scan &amp; Clean</button>
+        <button class="btn" id="bBox" type="button">▣ Manual Box</button>
+        <button class="btn red" id="bRst" type="button">↺ Reset</button>
       </div>
 
-      <div class="progress-area" id="progressArea">
-        <div class="progress-top">
-          <span id="progressLabel">Cleaning...</span>
-          <span id="progressPercent">0%</span>
-        </div>
-        <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
-        <div class="status" id="status"></div>
+      <div id="pArea" class="hide">
+        <div class="bar"><i id="pBar"></i></div>
+        <div class="st" id="stTxt"></div>
       </div>
 
-      <div class="result" id="result">
-        <h3>✅ वॉटरमार्क पूरी तरह साफ हो गया!</h3>
-        <div id="resultMedia"></div>
-        <a href="#" id="downloadLink" download="pawan-studio-clean.png">⬇ साफ फाइल डाउनलोड करें</a>
+      <div id="res" class="res hide">
+        <strong style="color:#86efac;font-size:15px">✅ वॉटरमार्क पूरी तरह साफ हो गया!</strong>
+        <div id="rMed"></div>
+        <a id="dl" class="dl" href="#" download="pawan-studio-clean.png">⬇ साफ फाइल डाउनलोड करें</a>
       </div>
     </div>
-  </section>
-</main>
-
-<footer>
-  <p>© 2026 Pawan Studio • Free Video &amp; Photo Watermark Remover Online</p>
-</footer>
+  </div>
+</div>
 
 <script>
-(() => {
-  "use strict";
-  const $ = id => document.getElementById(id);
-  const cl = (v, a, b) => Math.max(a, Math.min(b, v));
+(()=>{
+"use strict";
+const $=id=>document.getElementById(id),cl=(v,a,b)=>Math.max(a,Math.min(b,v));
+const S={mode:"photo",file:null,url:null,W:0,H:0,rect:{x:0,y:0,w:0,h:0,name:"Bottom-Right"},runId:0};
+const pImg=$("pImg"),pVid=$("pVid"),outC=$("outC"),sel=$("sel"),hd=$("hd");
 
-  const state = {
-    mode: "photo", file: null, url: null, W: 0, H: 0,
-    rect: { x: 0, y: 0, w: 0, h: 0, name: "Bottom-Right" },
-    busy: false, runId: 0
-  };
+function setMode(m){
+  S.mode=m;
+  $("tImg").classList.toggle("on",m==="photo");
+  $("tVid").classList.toggle("on",m==="video");
+  $("uTit").textContent=m==="photo"?"Choose Your Photo":"Choose Your Video";
+  $("uSub").textContent=m==="photo"?"यहाँ टैप करके फोटो चुनें — तुरंत ऑटो-रिमूव शुरू होगा":"यहाँ टैप करके वीडियो चुनें — तुरंत ऑटो-रिमूव शुरू होगा";
+  $("fIn").accept=m==="photo"?"image/*":"video/*";
+  $("work").classList.add("hide");$("res").classList.add("hide");$("fInf").textContent="";
+}
+$("tImg").onclick=()=>setMode("photo");
+$("tVid").onclick=()=>setMode("video");
+$("sens").oninput=e=>$("vSens").textContent=e.target.value;
+$("grn").oninput=e=>$("vGrn").textContent=e.target.value+"%";
+$("mChk").onchange=e=>{sel.classList.toggle("on",e.target.checked);syncBox()};
+$("bBox").onclick=()=>{$("mChk").checked=!$("mChk").checked;sel.classList.toggle("on",$("mChk").checked);syncBox()};
 
-  const photoTab = $("photoTab"), videoTab = $("videoTab"), fileInput = $("fileInput");
-  const photoPreview = $("photoPreview"), videoPreview = $("videoPreview"), outputCanvas = $("outputCanvas");
-  const selLayer = $("selectionLayer"), selHandle = $("selectionHandle");
+function syncBox(){
+  if(!S.W||!S.H)return;
+  const el=outC.classList.contains("vis")?outC:(S.mode==="photo"?pImg:pVid);
+  const sR=$("stg").getBoundingClientRect(),eR=el.getBoundingClientRect();
+  if(!eR.width)return;
+  sel.style.left=((eR.left-sR.left)+(S.rect.x/S.W)*eR.width)+"px";
+  sel.style.top=((eR.top-sR.top)+(S.rect.y/S.H)*eR.height)+"px";
+  sel.style.width=((S.rect.w/S.W)*eR.width)+"px";
+  sel.style.height=((S.rect.h/S.H)*eR.height)+"px";
+}
+window.addEventListener("resize",syncBox);
 
-  function setMode(m) {
-    state.mode = m;
-    photoTab.classList.toggle("active", m === "photo");
-    videoTab.classList.toggle("active", m === "video");
-    $("uploadTitle").textContent = m === "photo" ? "Choose Your Photo" : "Choose Your Video";
-    $("uploadDescription").textContent = m === "photo"
-      ? "यहाँ टैप करके फोटो चुनें — तुरंत ऑटो-रिमूव शुरू होगा"
-      : "यहाँ टैप करके वीडियो चुनें — तुरंत ऑटो-रिमूव शुरू होगा";
-    fileInput.accept = m === "photo" ? "image/*" : "video/*";
-    $("workspace").classList.remove("show");
-    $("result").classList.remove("show");
-    $("fileInfo").textContent = "";
-  }
-  photoTab.onclick = () => setMode("photo");
-  videoTab.onclick = () => setMode("video");
-
-  $("threshold").oninput = e => $("thresholdValue").textContent = e.target.value;
-  $("grain").oninput = e => $("grainValue").textContent = e.target.value + "%";
-  $("manualToggle").onchange = e => { selLayer.classList.toggle("active", e.target.checked); syncBox(); };
-  $("manualBtn").onclick = () => {
-    $("manualToggle").checked = !$("manualToggle").checked;
-    selLayer.classList.toggle("active", $("manualToggle").checked);
+sel.onpointerdown=e=>{
+  e.preventDefault();
+  const el=outC.classList.contains("vis")?outC:(S.mode==="photo"?pImg:pVid);
+  const eR=el.getBoundingClientRect();if(!eR.width)return;
+  const rz=e.target===hd,sx=e.clientX,sy=e.clientY,ox=S.rect.x,oy=S.rect.y,ow=S.rect.w,oh=S.rect.h;
+  sel.setPointerCapture(e.pointerId);
+  sel.onpointermove=ev=>{
+    const dx=((ev.clientX-sx)/eR.width)*S.W,dy=((ev.clientY-sy)/eR.height)*S.H;
+    if(rz){S.rect.w=Math.round(cl(ow+dx,14,S.W-S.rect.x-2));S.rect.h=Math.round(cl(oh+dy,14,S.H-S.rect.y-2))}
+    else{S.rect.x=Math.round(cl(ox+dx,2,S.W-S.rect.w-2));S.rect.y=Math.round(cl(oy+dy,2,S.H-S.rect.h-2))}
     syncBox();
   };
+  sel.onpointerup=sel.onpointercancel=()=>{sel.onpointermove=null;clean(false)};
+};
 
-  function syncBox() {
-    if (!state.W || !state.H) return;
-    const activeEl = outputCanvas.classList.contains("visible") ? outputCanvas : (state.mode === "photo" ? photoPreview : videoPreview);
-    const sR = $("previewStage").getBoundingClientRect();
-    const eR = activeEl.getBoundingClientRect();
-    if (!eR.width || !eR.height) return;
-    selLayer.style.left = ((eR.left - sR.left) + (state.rect.x / state.W) * eR.width) + "px";
-    selLayer.style.top = ((eR.top - sR.top) + (state.rect.y / state.H) * eR.height) + "px";
-    selLayer.style.width = ((state.rect.w / state.W) * eR.width) + "px";
-    selLayer.style.height = ((state.rect.h / state.H) * eR.height) + "px";
+function detect(ctx,W,H){
+  const zw=Math.max(24,Math.round(W*.34)),zh=Math.max(18,Math.round(H*.16));
+  const zs=[
+    {name:"Bottom-Right",x:W-zw-Math.round(W*.01),y:H-zh-Math.round(H*.01),w:zw,h:zh},
+    {name:"Bottom-Left",x:Math.round(W*.01),y:H-zh-Math.round(H*.01),w:zw,h:zh},
+    {name:"Top-Right",x:W-zw-Math.round(W*.01),y:Math.round(H*.01),w:zw,h:zh},
+    {name:"Top-Left",x:Math.round(W*.01),y:Math.round(H*.01),w:zw,h:zh}
+  ];
+  let best=zs[0],bSc=-1,tight=null;
+  for(const z of zs){
+    const d=ctx.getImageData(z.x,z.y,z.w,z.h).data;
+    let bS=0,bC=0;
+    for(let j=0;j<z.h;j++)for(let i=0;i<z.w;i++)if(i<2||i>=z.w-2||j<2||j>=z.h-2){const p=(j*z.w+i)*4;bS+=.3*d[p]+.59*d[p+1]+.11*d[p+2];bC++}
+    const bgL=bS/Math.max(1,bC);
+    let mX=z.w,mY=z.h,xX=0,xY=0,hits=0;
+    for(let j=2;j<z.h-2;j++)for(let i=2;i<z.w-2;i++){
+      const p=(j*z.w+i)*4,pR=p+4,pD=((j+1)*z.w+i)*4;
+      const l=.3*d[p]+.59*d[p+1]+.11*d[p+2];
+      const ed=Math.abs(l-(.3*d[pR]+.59*d[pR+1]+.11*d[pR+2]))+Math.abs(l-(.3*d[pD]+.59*d[pD+1]+.11*d[pD+2]));
+      if(ed>34&&Math.abs(l-bgL)>20){hits++;if(i<mX)mX=i;if(i>xX)xX=i;if(j<mY)mY=j;if(j>xY)xY=j}
+    }
+    const den=hits/Math.max(1,(z.w-4)*(z.h-4)),sc=(den>.01&&den<.55)?hits:hits*.15;
+    if(sc>bSc){bSc=sc;best=z;if(hits>10&&xX>mX&&xY>mY){const pad=6,rx=cl(z.x+mX-pad,2,W-12),ry=cl(z.y+mY-pad,2,H-12);tight={name:z.name,x:rx,y:ry,w:cl(xX-mX+pad*2,12,W-rx-2),h:cl(xY-mY+pad*2,12,H-ry-2)}}else tight={...z}}
   }
-  window.addEventListener("resize", syncBox);
+  return tight||best;
+}
 
-  selLayer.onpointerdown = e => {
-    e.preventDefault();
-    const activeEl = outputCanvas.classList.contains("visible") ? outputCanvas : (state.mode === "photo" ? photoPreview : videoPreview);
-    const eR = activeEl.getBoundingClientRect();
-    if (!eR.width) return;
-    const resizing = e.target === selHandle;
-    const sx = e.clientX, sy = e.clientY, ox = state.rect.x, oy = state.rect.y, ow = state.rect.w, oh = state.rect.h;
-    selLayer.setPointerCapture(e.pointerId);
-    selLayer.onpointermove = ev => {
-      const dx = ((ev.clientX - sx) / eR.width) * state.W;
-      const dy = ((ev.clientY - sy) / eR.height) * state.H;
-      if (resizing) {
-        state.rect.w = Math.round(cl(ow + dx, 14, state.W - state.rect.x - 2));
-        state.rect.h = Math.round(cl(oh + dy, 14, state.H - state.rect.y - 2));
-      } else {
-        state.rect.x = Math.round(cl(ox + dx, 2, state.W - state.rect.w - 2));
-        state.rect.y = Math.round(cl(oy + dy, 2, state.H - state.rect.h - 2));
-      }
-      syncBox();
+function inpaint(ctx,W,H,r){
+  const x=cl(Math.round(r.x),2,W-6),y=cl(Math.round(r.y),2,H-6),w=cl(Math.round(r.w),4,W-x-2),h=cl(Math.round(r.h),4,H-y-2);
+  const pad=4,bx=x-pad,by=y-pad,bw=w+pad*2,bh=h+pad*2,img=ctx.getImageData(bx,by,bw,bh),d=img.data,mk=new Uint8Array(bw*bh);
+  const sens=+$("sens").value||38,gAmt=(+$("grn").value||0)/100;
+  let rS=0,gS=0,bS=0,c=0;
+  for(let j=0;j<bh;j++)for(let i=0;i<bw;i++)if(i<pad||i>=bw-pad||j<pad||j>=bh-pad){const p=(j*bw+i)*4;rS+=d[p];gS+=d[p+1];bS+=d[p+2];c++}
+  const bR=rS/c,bG=gS/c,bB=bS/c;let mc=0;
+  for(let j=pad;j<bh-pad;j++)for(let i=pad;i<bw-pad;i++){const p=(j*bw+i)*4;if(Math.abs(d[p]-bR)+Math.abs(d[p+1]-bG)+Math.abs(d[p+2]-bB)>sens){mk[j*bw+i]=1;mc++}}
+  if(mc<10){for(let j=pad;j<bh-pad;j++)for(let i=pad;i<bw-pad;i++)mk[j*bw+i]=1}
+  else{const cp=new Uint8Array(mk);for(let j=pad;j<bh-pad;j++)for(let i=pad;i<bw-pad;i++)if(!cp[j*bw+i]&&(cp[(j-1)*bw+i]||cp[(j+1)*bw+i]||cp[j*bw+i-1]||cp[j*bw+i+1]))mk[j*bw+i]=1}
+  let left=true,g=0;
+  while(left&&g++<140){
+    left=false;const nx=new Uint8Array(mk);
+    for(let j=pad;j<bh-pad;j++)for(let i=pad;i<bw-pad;i++){
+      const idx=j*bw+i;if(!mk[idx])continue;left=true;let wr=0,wg=0,wb=0,wt=0;
+      for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const n=(j+dy)*bw+(i+dx);if(!mk[n]){const wv=(!dx||!dy)?1.45:.85,p=n*4;wr+=d[p]*wv;wg+=d[p+1]*wv;wb+=d[p+2]*wv;wt+=wv}}
+      if(wt>0){const gn=(((i*73+j*151)&15)-7.5)*gAmt,p=idx*4;d[p]=cl(Math.round(wr/wt+gn),0,255);d[p+1]=cl(Math.round(wg/wt+gn),0,255);d[p+2]=cl(Math.round(wb/wt+gn),0,255);nx[idx]=0}
+    }
+    mk.set(nx);
+  }
+  ctx.putImageData(img,bx,by);
+}
+
+$("fIn").onchange=e=>{
+  const f=e.target.files&&e.target.files[0];if(!f)return;
+  if(S.url)URL.revokeObjectURL(S.url);
+  S.file=f;S.url=URL.createObjectURL(f);
+  $("fInf").textContent="📁 "+f.name+" ("+(f.size/1048576).toFixed(2)+" MB)";
+  $("work").classList.remove("hide");$("res").classList.add("hide");
+  pImg.classList.remove("vis");pVid.classList.remove("vis");outC.classList.remove("vis");
+  if(S.mode==="photo"){
+    pImg.onload=()=>{S.W=pImg.naturalWidth;S.H=pImg.naturalHeight;$("dim").textContent=S.W+"×"+S.H;clean(true)};
+    pImg.src=S.url;pImg.classList.add("vis");
+  }else{
+    pVid.onloadeddata=()=>{const sc=Math.min(1,1920/Math.max(pVid.videoWidth,pVid.videoHeight));S.W=Math.max(2,Math.round(pVid.videoWidth*sc)&~1);S.H=Math.max(2,Math.round(pVid.videoHeight*sc)&~1);$("dim").textContent=S.W+"×"+S.H;clean(true)};
+    pVid.src=S.url;pVid.classList.add("vis");
+  }
+};
+
+$("bRun").onclick=()=>clean(true);
+$("bRst").onclick=()=>{$("work").classList.add("hide");$("res").classList.add("hide");$("fIn").value=""};
+
+async function clean(auto){
+  if(!S.url||!S.W)return;
+  if(S.mode==="photo"){
+    outC.width=S.W;outC.height=S.H;
+    const ctx=outC.getContext("2d",{willReadFrequently:true});
+    ctx.drawImage(pImg,0,0,S.W,S.H);
+    if(auto){S.rect=detect(ctx,S.W,S.H);$("zLbl").textContent="✅ Auto: "+S.rect.name}
+    inpaint(ctx,S.W,S.H,S.rect);
+    pImg.classList.remove("vis");outC.classList.add("vis");requestAnimationFrame(syncBox);
+    const u=outC.toDataURL("image/png");
+    $("res").classList.remove("hide");$("rMed").innerHTML=`<img src="${u}">`;
+    $("dl").href=u;$("dl").download=(S.file.name.replace(/\.[^.]+$/,"")||"photo")+"_clean.png";
+    return;
+  }
+  const id=++S.runId;$("pArea").classList.remove("hide");$("res").classList.add("hide");
+  let ac=null,wl=null,rec=null;
+  const stop=()=>{try{ac&&ac.close()}catch(_){}try{wl&&wl.release()}catch(_){}};
+  try{
+    const v=document.createElement("video");v.src=S.url;v.playsInline=true;v.preload="auto";
+    await new Promise((ok,no)=>{v.onloadeddata=ok;v.onerror=()=>no(new Error("Video error"))});
+    if(id!==S.runId){stop();return}
+    outC.width=S.W;outC.height=S.H;
+    const ctx=outC.getContext("2d",{willReadFrequently:true});
+    ctx.drawImage(v,0,0,S.W,S.H);
+    if(auto){S.rect=detect(ctx,S.W,S.H);$("zLbl").textContent="✅ Auto: "+S.rect.name}
+    pVid.classList.remove("vis");outC.classList.add("vis");requestAnimationFrame(syncBox);
+    const st=outC.captureStream(30);
+    if($("aChk").checked){try{ac=new(window.AudioContext||window.webkitAudioContext)();const s=ac.createMediaElementSource(v),d=ac.createMediaStreamDestination();s.connect(d);d.stream.getAudioTracks().forEach(t=>st.addTrack(t));await ac.resume()}catch(_){}}
+    const mt=["video/mp4;codecs=avc1.42E01E,mp4a.40.2","video/mp4","video/webm;codecs=vp9,opus","video/webm"].find(t=>MediaRecorder.isTypeSupported(t));
+    rec=new MediaRecorder(st,mt?{mimeType:mt,videoBitsPerSecond:6000000}:{videoBitsPerSecond:6000000});
+    const ch=[];rec.ondataavailable=e=>{if(e.data&&e.data.size)ch.push(e.data)};
+    rec.onstop=()=>{
+      stop();if(id!==S.runId)return;
+      const tp=mt?mt.split(";")[0]:"video/webm",u=URL.createObjectURL(new Blob(ch,{type:tp}));
+      $("pBar").style.width="100%";$("stTxt").textContent="✅ तैयार है!";
+      $("res").classList.remove("hide");$("rMed").innerHTML=`<video src="${u}" controls playsinline></video>`;
+      $("dl").href=u;$("dl").download=(S.file.name.replace(/\.[^.]+$/,"")||"video")+"_clean."+(tp.includes("mp4")?"mp4":"webm");
     };
-    selLayer.onpointerup = selLayer.onpointercancel = () => { selLayer.onpointermove = null; runClean(false); };
-  };
-
-  function autoDetect(ctx, W, H) {
-    const zw = Math.max(24, Math.round(W * 0.34)), zh = Math.max(18, Math.round(H * 0.16));
-    const zones = [
-      { name: "Bottom-Right", x: W - zw - Math.round(W * 0.01), y: H - zh - Math.round(H * 0.01), w: zw, h: zh },
-      { name: "Bottom-Left",  x: Math.round(W * 0.01),          y: H - zh - Math.round(H * 0.01), w: zw, h: zh },
-      { name: "Top-Right",    x: W - zw - Math.round(W * 0.01), y: Math.round(H * 0.01),          w: zw, h: zh },
-      { name: "Top-Left",     x: Math.round(W * 0.01),          y: Math.round(H * 0.01),          w: zw, h: zh }
-    ];
-    let best = zones[0], bestScore = -1, bestTight = null;
-    for (const z of zones) {
-      const d = ctx.getImageData(z.x, z.y, z.w, z.h).data;
-      let bgS = 0, bgC = 0;
-      for (let j = 0; j < z.h; j++) for (let i = 0; i < z.w; i++) {
-        if (i < 2 || i >= z.w - 2 || j < 2 || j >= z.h - 2) {
-          const p = (j * z.w + i) * 4;
-          bgS += 0.299 * d[p] + 0.587 * d[p + 1] + 0.114 * d[p + 2]; bgC++;
-        }
-      }
-      const bgL = bgS / Math.max(1, bgC);
-      let minX = z.w, minY = z.h, maxX = 0, maxY = 0, hits = 0;
-      for (let j = 2; j < z.h - 2; j++) for (let i = 2; i < z.w - 2; i++) {
-        const p = (j * z.w + i) * 4, pR = p + 4, pD = ((j + 1) * z.w + i) * 4;
-        const l = 0.299 * d[p] + 0.587 * d[p + 1] + 0.114 * d[p + 2];
-        const edge = Math.abs(l - (0.299 * d[pR] + 0.587 * d[pR + 1] + 0.114 * d[pR + 2])) +
-                     Math.abs(l - (0.299 * d[pD] + 0.587 * d[pD + 1] + 0.114 * d[pD + 2]));
-        if (edge > 34 && Math.abs(l - bgL) > 20) {
-          hits++;
-          if (i < minX) minX = i; if (i > maxX) maxX = i;
-          if (j < minY) minY = j; if (j > maxY) maxY = j;
-        }
-      }
-      const density = hits / Math.max(1, (z.w - 4) * (z.h - 4));
-      const score = (density > 0.01 && density < 0.55) ? hits : hits * 0.15;
-      if (score > bestScore) {
-        bestScore = score; best = z;
-        if (hits > 10 && maxX > minX && maxY > minY) {
-          const pad = 6, rx = cl(z.x + minX - pad, 2, W - 12), ry = cl(z.y + minY - pad, 2, H - 12);
-          bestTight = { name: z.name, x: rx, y: ry, w: cl((maxX - minX) + pad * 2, 12, W - rx - 2), h: cl((maxY - minY) + pad * 2, 12, H - ry - 2) };
-        } else bestTight = { ...z };
-      }
-    }
-    return bestTight || best;
-  }
-
-  function reconstruct(ctx, W, H, rect) {
-    const x = cl(Math.round(rect.x), 2, W - 6), y = cl(Math.round(rect.y), 2, H - 6);
-    const w = cl(Math.round(rect.w), 4, W - x - 2), h = cl(Math.round(rect.h), 4, H - y - 2);
-    const pad = 4, bx = x - pad, by = y - pad, bw = w + pad * 2, bh = h + pad * 2;
-    const img = ctx.getImageData(bx, by, bw, bh), d = img.data;
-    const mask = new Uint8Array(bw * bh);
-    const sens = parseInt($("threshold").value, 10) || 38;
-    const grainAmt = (parseInt($("grain").value, 10) || 0) / 100;
-
-    let rS = 0, gS = 0, bS = 0, cnt = 0;
-    for (let j = 0; j < bh; j++) for (let i = 0; i < bw; i++) {
-      if (i < pad || i >= bw - pad || j < pad || j >= bh - pad) {
-        const p = (j * bw + i) * 4; rS += d[p]; gS += d[p + 1]; bS += d[p + 2]; cnt++;
-      }
-    }
-    const bgR = rS / cnt, bgG = gS / cnt, bgB = bS / cnt;
-
-    let mCount = 0;
-    for (let j = pad; j < bh - pad; j++) for (let i = pad; i < bw - pad; i++) {
-      const p = (j * bw + i) * 4;
-      if (Math.abs(d[p] - bgR) + Math.abs(d[p + 1] - bgG) + Math.abs(d[p + 2] - bgB) > sens) {
-        mask[j * bw + i] = 1; mCount++;
-      }
-    }
-    if (mCount < 10) {
-      for (let j = pad; j < bh - pad; j++) for (let i = pad; i < bw - pad; i++) mask[j * bw + i] = 1;
-    } else {
-      const cp = new Uint8Array(mask);
-      for (let j = pad; j < bh - pad; j++) for (let i = pad; i < bw - pad; i++) {
-        if (!cp[j * bw + i] && (cp[(j - 1) * bw + i] || cp[(j + 1) * bw + i] || cp[j * bw + i - 1] || cp[j * bw + i + 1])) mask[j * bw + i] = 1;
-      }
-    }
-
-    let left = true, guard = 0;
-    while (left && guard++ < 140) {
-      left = false;
-      const next = new Uint8Array(mask);
-      for (let j = pad; j < bh - pad; j++) for (let i = pad; i < bw - pad; i++) {
-        const idx = j * bw + i;
-        if (!mask[idx]) continue;
-        left = true;
-        let wr = 0, wg = 0, wb = 0, wt = 0;
-        for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
-          if (!dx && !dy) continue;
-          const nIdx = (j + dy) * bw + (i + dx);
-          if (!mask[nIdx]) {
-            const wtVal = (dx === 0 || dy === 0) ? 1.45 : 0.85;
-            const p = nIdx * 4;
-            wr += d[p] * wtVal; wg += d[p + 1] * wtVal; wb += d[p + 2] * wtVal; wt += wtVal;
-          }
-        }
-        if (wt > 0) {
-          const gNoise = (((i * 73 + j * 151) & 15) - 7.5) * grainAmt;
-    
+    try{wl=await navigator.wakeLock.request("screen")}catch(_){}
+    let on=true;
+    const loop=()=>{
+      if(!on||id!==S.runId){on=false;try{rec.state!=="inactive"&&rec.stop()}catch(_){}return}
+      ctx.drawImage(v,0,0,S.W,S.H);inpaint(ctx,S.W,S.H,S.rect);
+      const pc=v.duration?Math.min(99,Math.round(v.currentTime/v.duration*100)):0;
+      $("pBar").style.width=pc+"%";$("stTxt").textContent="⚡ क्लीनिंग हो रही है… "+pc+"%";
+      requestAnimationFrame(loop);
+    };
+    v.onended=()=>{ctx.drawImage(v,0,0,S.W,S.H);inpaint(ctx,S.W,S.H,S.rect);on=false;setTimeout(()=>{rec.state!=="inactive"&&rec.stop()},250)};
+    rec.start(800);v.currentTime=0;await v.play();loop();
+  }catch(e){stop();$("stTxt").textContent="❌ "+(e.message||"Error")}
+}
+})();
+</script>
+</body>
+      </html>
+                           
