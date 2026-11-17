@@ -1,216 +1,394 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en-IN">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Free Video & Photo Watermark Remover Online (No Upload, Unlimited) | Pawan Studio</title>
-<meta name="description" content="Remove watermark from video and photo free online: no upload, no signup, unlimited length. Video aur photo se watermark hataye in seconds on mobile & PC.">
-<meta name="keywords" content="video watermark remover, free video watermark remover online, photo watermark remover, image watermark remover free, remove watermark from video without app, remove watermark from photo online, video se watermark kaise hataye, video ka watermark remove kaise kare, photo se watermark kaise hataye, bina app ke watermark hataye, watermark remover for mobile, unlimited watermark remover, no upload watermark remover, watermark hatane wala website, watermark hatane wala app online, remove logo from video free, remove text from image online, clean video watermark free, Pawan Studio watermark remover">
-<meta name="robots" content="index, follow">
+<title>Auto AI Video & Photo Watermark Remover Online (Free, No Upload) | Pawan Studio</title>
+<meta name="description" content="Auto-detect free video & photo watermark remover online by Pawan Studio. Upload karte hi watermark apne aap remove hoga – no blur smudge, crystal clear quality, Android Chrome ready.">
+<meta name="keywords" content="auto video watermark remover, photo watermark remover, free watermark remover, watermark remover online, remove watermark from video, remove watermark from photo, unlimited watermark remover, no upload watermark remover, watermark remover without app, watermark remover for android, remove capcut watermark, remove inshot watermark, remove kinemaster watermark, video se watermark kaise hataye, photo se watermark kaise hataye, bina app ke watermark hataye, watermark hatane wala website, Pawan Studio watermark remover">
 <meta name="google-site-verification" content="woLpL-OWe-HxWri5WR8tHoXO-lkyapvXUa75CBSDooI" />
+<meta name="author" content="Pawan Studio">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://pawan-watermark-remover.onrender.com/">
-<meta property="og:title" content="Free Video & Photo Watermark Remover Online (No Upload) | Pawan Studio">
-<meta property="og:description" content="100% free, unlimited-length video & photo watermark remover. Runs privately in your browser on mobile & PC.">
-<meta property="og:type" content="website">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Pawan Studio Watermark Remover","url":"https://pawan-watermark-remover.onrender.com/","applicationCategory":"MultimediaApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}
-</script>
 <style>
-:root{--bg:#070b14;--card:#101726;--card2:#162035;--line:#24314d;--txt:#f1f5f9;--mut:#94a3b8;--acc:#f43f5e;--pri:#6366f1;--ok:#10b981}
+:root{--bg:#060913;--card:#0e1525;--card2:#151f36;--line:#233152;--txt:#f8fafc;--mut:#94a3b8;--pri:#6366f1;--pri2:#8b5cf6;--acc:#ec4899;--ok:#10b981}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:radial-gradient(1000px 500px at 50% -10%,#1e1b4b 0%,var(--bg) 65%);color:var(--txt);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;line-height:1.5}
-.nav{border-bottom:1px solid var(--line);background:rgba(16,23,38,.92);padding:12px 16px;position:sticky;top:0;z-index:50}
-.nav-in{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
-.brand{font-weight:800;font-size:1.1rem;display:flex;align-items:center;gap:8px}
-.badge{background:rgba(99,102,241,.2);color:#a5b4fc;border:1px solid rgba(99,102,241,.4);font-size:.72rem;padding:2px 8px;border-radius:99px;font-weight:700}
-.wrap{max-width:900px;margin:0 auto;padding:16px 14px 60px}
-.hero{text-align:center;padding:6px 0 14px}
-.hero h1{font-size:1.45rem;margin:0 0 6px}
+body{margin:0;font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:radial-gradient(900px 500px at 50% -10%,#1e1b4b 0%,var(--bg) 65%);color:var(--txt);min-height:100vh}
+.nav{position:sticky;top:0;z-index:40;background:rgba(6,9,19,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:12px 16px}
+.nav-in{max-width:780px;margin:auto;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:900;font-size:1.1rem;display:flex;align-items:center;gap:8px;letter-spacing:-.02em}
+.pill{background:linear-gradient(135deg,rgba(99,102,241,.25),rgba(236,72,153,.25));border:1px solid rgba(139,92,246,.45);color:#c7d2fe;font-size:.7rem;padding:2px 9px;border-radius:99px;font-weight:800}
+.w{max-width:780px;margin:auto;padding:16px 14px 50px}
+.hero{text-align:center;padding:8px 0 16px}
+.hero h1{font-size:1.55rem;line-height:1.22;margin:0 0 6px;background:linear-gradient(90deg,#fff,#c7d2fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hero p{color:var(--mut);font-size:.88rem;margin:0}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.tab{background:var(--card);border:1px solid var(--line);color:var(--mut);padding:12px;border-radius:14px;font-weight:800;font-size:.95rem;cursor:pointer;text-align:center}
-.tab.active{background:linear-gradient(135deg,var(--pri),#8b5cf6);color:#fff;border-color:transparent}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:14px}
-.sec-title{font-size:.92rem;font-weight:700;margin-bottom:10px;display:flex;justify-content:space-between}
-.upload-zone{border:2px dashed #4f46e5;border-radius:14px;padding:24px 14px;text-align:center;background:rgba(22,32,53,.7);cursor:pointer;display:block;width:100%;color:var(--txt)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:14px 18px;font-size:1rem;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--pri),#8b5cf6);cursor:pointer;width:100%}
-.btn.red{background:linear-gradient(135deg,#e11d48,#f97316)}
-.btn.green{background:linear-gradient(135deg,#059669,#10b981)}
-.btn:disabled{opacity:.5;cursor:not-allowed}
-.file-hidden{position:fixed;left:-9999px;top:-9999px;opacity:0}
-.stage{position:relative;width:100%;background:#000;border-radius:12px;overflow:hidden;line-height:0;user-select:none}
-.stage video,.stage img{width:100%;display:block;max-height:66vh;object-fit:contain}
-.ov{position:absolute;inset:0;touch-action:none;pointer-events:none}
-.box{position:absolute;border:2px solid var(--acc);background:rgba(244,63,94,.25);touch-action:none;cursor:move;box-shadow:0 0 0 9999px rgba(0,0,0,.38);pointer-events:auto}
-.hd{position:absolute;width:24px;height:24px;background:var(--acc);border:2px solid #fff;border-radius:50%;touch-action:none}
-.hd[data-h=nw]{left:-12px;top:-12px}.hd[data-h=ne]{right:-12px;top:-12px}.hd[data-h=sw]{left:-12px;bottom:-12px}.hd[data-h=se]{right:-12px;bottom:-12px}
-.presets{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
-.pbtn{background:var(--card2);border:1px solid var(--line);color:#e2e8f0;padding:8px;border-radius:10px;font-size:.8rem;font-weight:600;cursor:pointer}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px}
-@media(max-width:520px){.grid{grid-template-columns:1fr}}
-label.l{display:flex;justify-content:space-between;font-size:.84rem;color:var(--mut)}
-label.l b{color:var(--txt)}
-input[type=range]{width:100%;accent-color:var(--acc);height:26px}
-.modes{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.mode{border:1px solid var(--line);border-radius:12px;padding:10px;cursor:pointer;font-size:.86rem;background:var(--card2);display:block}
-.mode.sel{border-color:var(--pri);background:rgba(99,102,241,.16)}
-.mode small{display:block;color:var(--mut);font-size:.76rem}
-.bar{height:14px;background:#070b14;border-radius:99px;overflow:hidden;border:1px solid var(--line)}
-.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pri),var(--ok));transition:width .2s}
-.msg{font-size:.85rem;margin-top:8px;color:var(--mut)}
-.err{color:#fda4af;background:#2e1018;border:1px solid #881337;padding:10px;border-radius:10px;margin-top:10px;font-size:.86rem}
-.warn{color:#fde68a;background:#29200e;border:1px solid #78350f;padding:10px;border-radius:10px;margin-bottom:12px;font-size:.85rem}
-.hide{display:none}
-.row{display:flex;gap:12px;align-items:center;margin-top:12px}
-.compare{margin-top:14px;border-top:1px solid var(--line);padding-top:14px}
-.compare video,.compare img{width:100%;border-radius:12px;border:1px solid var(--ok);max-height:60vh;object-fit:contain}
-.faq h2{font-size:1.05rem;margin:0 0 10px;color:#a5b4fc}
-.faq details{border-bottom:1px solid var(--line);padding:10px 0;font-size:.86rem}
-.faq summary{font-weight:700;cursor:pointer;color:#e2e8f0}
-.faq p{margin:6px 0 0;color:var(--mut)}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.tags span{background:var(--card2);border:1px solid var(--line);color:var(--mut);font-size:.74rem;padding:4px 8px;border-radius:8px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:var(--card);padding:6px;border-radius:16px;border:1px solid var(--line);margin-bottom:14px}
+.tabs button{border:0;background:transparent;color:var(--mut);padding:12px;border-radius:12px;font:800 .95rem inherit;cursor:pointer;transition:.2s}
+.tabs button.on{background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;box-shadow:0 6px 20px rgba(99,102,241,.35)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;margin-bottom:14px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.drop{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:126px;border:2px dashed #4f46e5;border-radius:14px;background:linear-gradient(180deg,rgba(99,102,241,.08),rgba(21,31,54,.6));text-align:center;padding:16px;cursor:pointer;overflow:hidden}
+.drop input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:0}
+.drop strong{font-size:1.05rem;color:#fff}
+.drop small{color:var(--mut);margin-top:4px;font-size:.8rem}
+.badge-row{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:10px}
+.tag{background:var(--card2);border:1px solid var(--line);color:#cbd5e1;font-size:.73rem;padding:4px 9px;border-radius:99px;font-weight:600}
+.tag.ok{border-color:rgba(16,185,129,.45);color:#6ee7b7;background:rgba(16,185,129,.1)}
+.stage{position:relative;margin:12px auto;border-radius:12px;overflow:hidden;background:#000;line-height:0;user-select:none}
+.stage video,.stage img,.stage canvas{width:100%;height:auto;display:block;max-height:62vh;object-fit:contain}
+.box{position:absolute;border:2px solid #38bdf8;background:rgba(56,189,248,.16);box-shadow:0 0 0 9999px rgba(6,9,19,.45);touch-action:none;cursor:move}
+.box.hidden{display:none}
+.h{position:absolute;right:-3px;bottom:-3px;width:28px;height:28px;background:#38bdf8;border-radius:8px 0 0 0;touch-action:none;cursor:nwse-resize}
+.ctrl-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chip{flex:1;min-width:110px;padding:10px 8px;border:1px solid var(--line);border-radius:10px;background:var(--card2);color:#e2e8f0;font:700 .8rem inherit;cursor:pointer;text-align:center}
+.chip.on{border-color:var(--pri);background:rgba(99,102,241,.22);color:#fff}
+.go{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;margin-top:12px;border:0;border-radius:12px;background:linear-gradient(135deg,var(--pri),var(--acc));color:#fff;font:800 1rem inherit;cursor:pointer;text-decoration:none}
+.go:disabled{opacity:.55;cursor:not-allowed}
+.dl{background:linear-gradient(135deg,#059669,#10b981)}
+.bar{height:10px;background:#060913;border-radius:99px;overflow:hidden;margin-top:12px;border:1px solid var(--line)}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#38bdf8,var(--ok));transition:width .2s}
+.st{font-size:.84rem;color:#cbd5e1;margin:8px 0 0;font-weight:600;text-align:center}
+.res{margin-top:14px;border-top:1px solid var(--line);padding-top:14px}
+.res video,.res img{width:100%;border-radius:12px;border:1px solid var(--ok);display:block;max-height:62vh;object-fit:contain}
+.faq h2{font-size:1.05rem;margin:0 0 8px;color:#c7d2fe}
+details{border-bottom:1px solid var(--line);padding:10px 0;font-size:.86rem}
+summary{font-weight:700;cursor:pointer;color:#f1f5f9}
+details p{margin:6px 0 0;color:var(--mut)}
 </style>
 </head>
 <body>
-<nav class="nav"><div class="nav-in"><div class="brand">🎬 Pawan Studio <span class="badge">PRO FREE</span></div><div style="font-size:.8rem;color:var(--mut)">Video + Photo • No Upload</div></div></nav>
-<div class="wrap">
-  <div class="hero">
-    <h1>Free Video & Photo Watermark Remover Online</h1>
-    <p>Video aur Photo se watermark hataye in seconds — 100% Free, No Upload & Unlimited Length</p>
+<nav class="nav">
+  <div class="nav-in">
+    <div class="brand">✨ Pawan Studio <span class="pill">AUTO AI PRO</span></div>
+    <div style="font-size:.78rem;color:var(--mut)">Instant Auto-Remove</div>
   </div>
+</nav>
+
+<div class="w">
+  <header class="hero">
+    <h1>Auto AI Video &amp; Photo Watermark Remover</h1>
+    <p>फ़ाइल डालते ही वॉटरमार्क अपने आप पहचाने और बिना धुंधले धब्बे के क्रिस्टल-क्लियर साफ करे</p>
+  </header>
 
   <div class="tabs">
-    <button type="button" class="tab active" id="tabVid">🎬 Video Watermark Remover</button>
-    <button type="button" class="tab" id="tabImg">🖼️ Photo / Image Remover</button>
+    <button class="on" id="t-vid">🎬 Auto Video Remover</button>
+    <button id="t-img">🖼️ Auto Photo Remover</button>
   </div>
 
-  <!-- VIDEO SECTION -->
-  <div id="secVid">
-    <div id="isoWarn" class="warn hide"></div>
+  <!-- VIDEO PANEL -->
+  <section id="p-vid">
     <div class="card">
-      <button type="button" class="upload-zone" id="pickVidBtn"><strong style="font-size:1.05rem">📁 वीडियो चुनें / Select Video</strong><div style="color:var(--mut);font-size:.8rem;margin-top:4px">MP4, MOV, MKV, WEBM • Bina App Ke Video Se Watermark Hataye</div></button>
-      <input id="file" class="file-hidden" type="file" accept="video/mp4,video/x-m4v,video/*,.mp4,.mov,.mkv,.webm">
-      <div id="fname" class="msg" style="text-align:center;color:#a5b4fc;font-weight:600"></div>
-    </div>
-    <div id="editor" class="hide">
-      <div class="card">
-        <div class="sec-title"><span>1. वॉटरमार्क पर बॉक्स सेट करें</span><span id="dim" style="font-size:.78rem;color:var(--mut)"></span></div>
-        <div class="stage"><video id="video" controls playsinline preload="metadata"></video><div class="ov"><div class="box" id="box"><div class="hd" data-h="nw"></div><div class="hd" data-h="ne"></div><div class="hd" data-h="sw"></div><div class="hd" data-h="se"></div></div></div></div>
-        <div class="presets">
-          <button type="button" class="pbtn" data-pos="br">↘️ नीचे दाएं (Bottom-Right)</button>
-          <button type="button" class="pbtn" data-pos="bl">↙️ नीचे बाएं (Bottom-Left)</button>
-          <button type="button" class="pbtn" data-pos="tr">↗️ ऊपर दाएं (Top-Right)</button>
-          <button type="button" class="pbtn" data-pos="tl">↖️ ऊपर बाएं (Top-Left)</button>
-        </div>
-      </div>
-      <div class="card">
-        <div class="sec-title"><span>2. बारीक एडजस्टमेंट (Fine-Tune)</span></div>
-        <div class="grid">
-          <div><label class="l"><span>X (Left)</span><b id="vx">0</b></label><input id="sx" type="range"></div>
-          <div><label class="l"><span>Y (Top)</span><b id="vy">0</b></label><input id="sy" type="range"></div>
-          <div><label class="l"><span>Width</span><b id="vw">0</b></label><input id="sw" type="range"></div>
-          <div><label class="l"><span>Height</span><b id="vh">0</b></label><input id="sh" type="range"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="sec-title"><span>3. रिमूवल मोड और स्पीड</span></div>
-        <div class="modes" style="margin-bottom:10px">
-          <label class="mode sel"><input type="radio" name="mode" value="delogo" checked>✨ Smooth Blend<small>आस-पास के रंगों से मिलाएं</small></label>
-          <label class="mode"><input type="radio" name="mode" value="blur">💧 Clean Blur<small>वॉटरमार्क को ब्लर करें</small></label>
-        </div>
-        <div class="modes">
-          <label class="mode sel"><input type="radio" name="speed" value="ultrafast" checked>⚡ Super Fast<small>तेज़ प्रोसेसिंग</small></label>
-          <label class="mode"><input type="radio" name="speed" value="fast">💎 High Quality<small>बेहतर क्वालिटी</small></label>
-        </div>
-      </div>
-      <div class="card">
-        <button class="btn red" id="go">🚀 वीडियो से वॉटरमार्क हटाएं / Remove Video Watermark</button>
-        <div class="row"><div style="flex:1"><div class="bar"><i id="pb"></i></div><div class="msg" id="status">तैयार है / Ready</div></div><div id="pct" style="min-width:48px;text-align:right;font-weight:800;color:#a5b4fc">0%</div></div>
-        <div id="err" class="err hide"></div>
-        <div id="done" class="compare hide">
-          <div class="sec-title" style="color:var(--ok)"><span>✅ साफ वीडियो तैयार है</span></div>
-          <video id="outVideo" controls playsinline></video>
-          <div style="margin-top:12px"><a id="dl" class="btn green" style="text-decoration:none">⬇️ साफ MP4 डाउनलोड करें</a></div>
-        </div>
+      <label class="drop">
+        <input type="file" accept="video/*" id="f-vid">
+        <strong>📁 वीडियो चुनें — अपलोड होते ही ऑटो-रिमूव शुरू होगा</strong>
+        <small>MP4, MOV, WebM • Zero Blur Smudge • Original Audio Safe</small>
+      </label>
+      <div class="badge-row">
+        <span class="tag ok">⚡ Auto Corner &amp; Logo Scan</span>
+        <span class="tag">💎 Pixel-Exact Smart Fill</span>
+        <span class="tag">🔒 100% Private Browser</span>
       </div>
     </div>
-  </div>
 
-  <!-- IMAGE / PHOTO SECTION -->
-  <div id="secImg" class="hide">
+    <div class="card" id="w-vid" hidden>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span style="font-weight:800;font-size:.9rem;color:#38bdf8" id="v-zone-lbl">🔍 ऑटो-डिटेक्टेड ज़ोन</span>
+        <button type="button" class="chip" style="flex:0;min-width:auto;padding:5px 10px" id="v-toggle-box">✏️ मैनुअल बॉक्स</button>
+      </div>
+      <div class="stage" id="st-vid">
+        <video id="m-vid" muted playsinline preload="metadata"></video>
+        <div class="box hidden" id="bx-vid"><i class="h"></i></div>
+      </div>
+      <div class="ctrl-row">
+        <button type="button" class="chip on" data-vmode="smart">✨ Smart Pixel Fill (No Blur)</button>
+        <button type="button" class="chip" data-vmode="box">🎯 Full Zone Inpaint</button>
+        <button type="button" class="chip" id="v-rescan">🔄 Re-Scan &amp; Run</button>
+      </div>
+      <div class="bar" id="bar-vid"><i></i></div>
+      <p class="st" id="st-txt-vid">तैयार हो रहा है…</p>
+      <div class="res" id="res-vid" hidden></div>
+    </div>
+  </section>
+
+  <!-- PHOTO PANEL -->
+  <section id="p-img" hidden>
     <div class="card">
-      <button type="button" class="upload-zone" id="pickImgBtn"><strong style="font-size:1.05rem">🖼️ फोटो चुनें / Select Photo or Image</strong><div style="color:var(--mut);font-size:.8rem;margin-top:4px">JPG, PNG, WEBP • Photo Se Watermark / Logo / Text Hataye</div></button>
-      <input id="ifile" class="file-hidden" type="file" accept="image/*">
-      <div id="ifname" class="msg" style="text-align:center;color:#a5b4fc;font-weight:600"></div>
+      <label class="drop">
+        <input type="file" accept="image/*" id="f-img">
+        <strong>🖼️ फोटो चुनें — डालते ही 1 सेकंड में वॉटरमार्क गायब</strong>
+        <small>JPG, PNG, WebP • Sharp Texture Reconstruction</small>
+      </label>
     </div>
-    <div id="ieditor" class="hide">
-      <div class="card">
-        <div class="sec-title"><span>1. फोटो के वॉटरमार्क पर बॉक्स सेट करें</span><span id="idim" style="font-size:.78rem;color:var(--mut)"></span></div>
-        <div class="stage"><img id="imgView" alt="Preview"><div class="ov"><div class="box" id="ibox"><div class="hd" data-h="nw"></div><div class="hd" data-h="ne"></div><div class="hd" data-h="sw"></div><div class="hd" data-h="se"></div></div></div></div>
-        <div class="presets">
-          <button type="button" class="pbtn ipbtn" data-pos="br">↘️ नीचे दाएं</button>
-          <button type="button" class="pbtn ipbtn" data-pos="bl">↙️ नीचे बाएं</button>
-          <button type="button" class="pbtn ipbtn" data-pos="tr">↗️ ऊपर दाएं</button>
-          <button type="button" class="pbtn ipbtn" data-pos="tl">↖️ ऊपर बाएं</button>
-        </div>
+
+    <div class="card" id="w-img" hidden>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span style="font-weight:800;font-size:.9rem;color:#38bdf8" id="i-zone-lbl">🔍 ऑटो-डिटेक्टेड ज़ोन</span>
+        <button type="button" class="chip" style="flex:0;min-width:auto;padding:5px 10px" id="i-toggle-box">✏️ मैनुअल बॉक्स</button>
       </div>
-      <div class="card">
-        <button class="btn red" id="igo">✨ फोटो से वॉटरमार्क हटाएं (1 सेकंड में)</button>
-        <div id="idone" class="compare hide">
-          <div class="sec-title" style="color:var(--ok)"><span>✅ साफ फोटो तैयार है</span></div>
-          <img id="outImg" alt="Clean Image">
-          <div style="margin-top:12px"><a id="idl" class="btn green" style="text-decoration:none">⬇️ साफ HD फोटो डाउनलोड करें</a></div>
-        </div>
+      <div class="stage" id="st-img">
+        <img id="m-img" alt="Original">
+        <div class="box hidden" id="bx-img"><i class="h"></i></div>
       </div>
+      <div class="ctrl-row">
+        <button type="button" class="chip on" data-imode="smart">✨ Smart Pixel Fill (No Blur)</button>
+        <button type="button" class="chip" data-imode="box">🎯 Full Zone Inpaint</button>
+        <button type="button" class="chip" id="i-run">⚡ Re-Clean Photo</button>
+      </div>
+      <p class="st" id="st-txt-img"></p>
+      <div class="res" id="res-img" hidden></div>
     </div>
-  </div>
+  </section>
 
   <div class="card faq">
-    <h2>Video & Photo Se Watermark Kaise Hataye — Complete Guide & FAQ</h2>
+    <h2>Auto Watermark Remover कैसे काम करता है?</h2>
     <details open>
-      <summary>बिना ऐप के वीडियो और फोटो का वॉटरमार्क कैसे हटाएं (Bina App Ke Watermark Hataye)?</summary>
-      <p>Pawan Studio की इस Free Watermark Hatane Wala Website पर अपना वीडियो या फोटो चुनें, लाल बॉक्स को लोगो/टेक्स्ट पर सेट करें और Remove Watermark दबा दें—बिना किसी ऐप के साफ MP4 और PNG तुरंत डाउनलोड हो जाएगा।</p>
+      <summary>यह पुराने टूल्स की तरह धुंधला धब्बा (Blur) क्यों नहीं बनाता?</summary>
+      <p>यह टूल पूरे बॉक्स को धुंधला करने के बजाय केवल वॉटरमार्क के अक्षरों और लोगो के पिक्सेल को पहचानता है, और बाहर से अंदर की तरफ परत-दर-परत असली बैकग्राउंड रंग और माइक्रो-टेक्सचर भरता है।</p>
     </details>
     <details>
-      <summary>क्या लंबे वीडियो (Unlimited Length) का वॉटरमार्क भी हट सकता है?</summary>
-      <p>हाँ, यह टूल 100% आपके मोबाइल या पीसी के ब्राउज़र में चलता है, इसलिए वीडियो की लंबाई (10 मिनट, 30 मिनट या 1 घंटा) की कोई सीमा नहीं है।</p>
+      <summary>अगर वॉटरमार्क बीच में हो तो क्या करें?</summary>
+      <p>वीडियो या फोटो चुनने के बाद ऊपर दाईं तरफ <b>"✏️ मैनुअल बॉक्स"</b> दबाएं, नीले बॉक्स को वॉटरमार्क पर रखें और <b>Re-Scan &amp; Run</b> दबा दें।</p>
     </details>
-    <details>
-      <summary>क्या मेरा वीडियो या फोटो सर्वर पर अपलोड होता है?</summary>
-      <p>नहीं, यह एक No-Upload Watermark Remover है। आपकी फ़ाइल आपके फोन या कंप्यूटर में ही प्रोसेस होती है और 100% सुरक्षित रहती है।</p>
-    </details>
-    <div class="tags">
-      <span>Video Watermark Remover</span><span>Photo Watermark Remover</span><span>Free Online No Upload</span><span>Video Se Watermark Kaise Hataye</span><span>Bina App Ke Watermark Hataye</span><span>Watermark Hatane Wala Website</span><span>Remove Logo From Video</span><span>Remove Text From Image</span><span>Mobile Watermark Remover</span><span>Unlimited Length Video</span>
-    </div>
   </div>
 </div>
-<script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js" crossorigin="anonymous"></script>
-<script>
-(function(){
-"use strict";
-const $=id=>document.getElementById(id),CORE="https://unpkg.com/@ffmpeg/core@0.11.0/dist/ffmpeg-core.js",M=2,MAX=2*1024*1024*1024-67108864;
-$("pickVidBtn").onclick=()=>{$("file").value="";$("file").click()};
-$("pickImgBtn").onclick=()=>{$("ifile").value="";$("ifile").click()};
-$("tabVid").onclick=()=>{$("tabVid").classList.add("active");$("tabImg").classList.remove("active");$("secVid").classList.remove("hide");$("secImg").classList.add("hide")};
-$("tabImg").onclick=()=>{$("tabImg").classList.add("active");$("tabVid").classList.remove("active");$("secImg").classList.remove("hide");$("secVid").classList.add("hide");irender()};
 
-// VIDEO LOGIC
-const S={file:null,url:null,vw:0,vh:0,x:0,y:0,w:0,h:0,ff:null,busy:false,outUrl:null},logs=[],video=$("video"),box=$("box");
-if(typeof SharedArrayBuffer==="undefined"||!window.crossOriginIsolated){$("isoWarn").textContent="⚠️ सर्वर पर COOP/COEP हेडर्स सक्रिय नहीं हैं। नीचे दिया गया server.py अपडेट करें।";$("isoWarn").classList.remove("hide")}
-const cl=(v,a,b)=>Math.min(Math.max(v,a),b),minW=()=>Math.min(16,Math.max(2,S.vw-2*M)),minH=()=>Math.min(16,Math.max(2,S.vh-2*M));
-function clampBox(){const mw=Math.max(2,S.vw-2*M),mh=Math.max(2,S.vh-2*M);S.w=Math.round(cl(S.w,minW(),mw));S.h=Math.round(cl(S.h,minH(),mh));S.x=Math.round(cl(S.x,M,S.vw-M-S.w));S.y=Math.round(cl(S.y,M,S.vh-M-S.h))}
-function render(){if(!S.vw||!video.clientWidth)return;const k=video.clientWidth/S.vw;box.style.left=(S.x*k)+"px";box.style.top=(S.y*k)+"px";box.style.width=(S.w*k)+"px";box.style.height=(S.h*k)+"px";$("sx").value=S.x;$("sy").value=S.y;$("sw").value=S.w;$("sh").value=S.h;$("vx").textContent=S.x+"px";$("vy").textContent=S.y+"px";$("vw").textContent=S.w+"px";$("vh").textContent=S.h+"px"}
-function setupSliders(){const set=(id,a,b)=>{const e=$(id);e.min=a;e.max=b;e.step=1};set("sx",M,S.vw-M-minW());set("sy",M,S.vh-M-minH());set("sw",minW(),S.vw-2*M);set("sh",minH(),S.vh-2*M);$("dim").textContent=S.vw+"×"+S.vh}
-document.querySelectorAll(".pbtn:not(.ipbtn)").forEach(b=>b.addEventListener("click",()=>{if(!S.vw)return;const p=b.dataset.pos;S.w=Math.round(S.vw*.24);S.h=Math.round(S.vh*.11);const px=Math.round(S.vw*.02),py=Math.round(S.vh*.02);if(p==="br"){S.x=S.vw-S.w-px;S.y=S.vh-S.h-py}if(p==="bl"){S.x=px;S.y=S.vh-S.h-py}if(p==="tr"){S.x=S.vw-S.w-px;S.y=py}if(p==="tl"){S.x=px;S.y=py}clampBox();render()}));
-["sx","sy","sw","sh"].forEach(id=>$(id).addEventListener("input",e=>{S[{sx:"x",sy:"y",sw:"w",sh:"h"}[id]]=parseInt(e.target.value,10)||0;clampBox();render()}));
-document.querySelectorAll('input[name=mode],input[name=speed]').forEach(r=>r.addEventListener("change",()=>document.querySelectorAll(`input[name=${r.name}]`).forEach(x=>x.parentElement.classList.toggle("sel",x.checked))));
-const showErr=t=>{$("err").textContent="❌ "+t;$("err").classList.remove("hide")},clearErr=()=>{$("err").classList.add("hide")},setProg=(p,t)=>{p=cl(Math.round(p),0,100);$("pb").style.width=p+"%";$("pct").textContent=p+"%";if(t!==undefined)$("status").textContent=t};
-$("file").addEventListener("change",e=>{const f=e.target.files&&e.target.files[0];if(!f)return;clearErr();$("done").classList.add("hide");setProg(0,"तैयार है");if(f.size>MAX){showErr("फ़ाइल 2GB से बड़ी है।");return}S.file=f;$("fname").textContent="🎞️ "+f.name+" ("+(f.size/1048576).toFixed(1)+" MB)";if(S.url)URL.revokeObjectURL(S.url);S.url=URL.createObjectURL(f);video.src=S.url;$("editor").classList.remove("hide")});
-video.addEventListener("loadedmetadata",()=>{S.vw=video.videoWidth;S.vh=video.videoHeight;S.w=Math.round(S.vw*.24);S.h=Math.round(S.vh*.11);S.x=S.vw-S.w-Math.round(S.vw*.02);S.y=S.vh-S.h-Math.round(S.vh*.02);setupSliders();clampBox();render()});
-window.addEventListener("resize",()=>{render();irender()});video.addEventListener("loadeddata",render);
-let drag=null;box.addEventListener("pointerdown",e=>{if(S.busy)return;drag={mode:(e.target.dataset&&e.target.dataset.h)||"move",sx:e.clientX,sy:e.clientY,ox:S.x,oy:S.y,ow:S.w,oh:S.h};try{box.setPointerCapture(e.pointerId)}catch(_){}e.preventDefault()});
-box.addEventListener("pointermove",e=>{if(!drag||!video.clientWidth)return;const k=S.vw/video.clientWidth,dx=(e.clientX-drag.sx)*k,dy=(e.clientY-drag.sy)*k,m=drag.mode;let L=drag.ox,T=drag.oy,R=drag.ox+drag.ow,B=drag.oy+drag.oh;if(m==="move"){L=cl(drag.ox+dx,M,S.vw-M-drag.ow);T=cl(drag.oy+dy,M,S.vh-M-drag.oh);R=L+drag.ow;B=T+drag.oh}else{if(m.indexOf("w")>=0)L=cl(drag.ox+dx,M,R-minW());if(m.indexOf("e")>=0)R=cl(drag.ox+drag.ow+dx,L+minW(),S.vw-M);if(m.indexOf("n")>=0)T=cl(drag.oy+dy,M,B-minH());if(m.indexOf("s")>=0)B=cl(drag.oy+drag.oh+dy,T+minH(),S.vh-M)}S.x=Math.round(L);S.y=Math.round(T);S.w=Math.round(R-L);S.h=Math.round(B-T);clampBox();render();e.preventDefault()});
-const endDrag=()=>{drag=null};box.addEventListener("pointerup",endDrag);box.addEventListener("pointercancel",endDrag);
-async function loadFF(){if(S.ff)return S.ff;const ff=FFmpeg.createFFmpeg({log:true,corePath:CORE});ff.setLogger(({message})=>{logs.push(String(message));if(logs.length>30)logs.shift()});await ff.load();S.ff=ff;return ff}
-function buildArgs(inName,outName,audioArgs){clampBox();const{x,
+<script>
+(()=>{
+"use strict";
+const $=id=>document.getElementById(id),cl=(v,a,b)=>Math.max(a,Math.min(b,v));
+
+// Tabs
+$("t-vid").onclick=()=>{$("t-vid").classList.add("on");$("t-img").classList.remove("on");$("p-vid").hidden=false;$("p-img").hidden=true};
+$("t-img").onclick=()=>{$("t-img").classList.add("on");$("t-vid").classList.remove("on");$("p-img").hidden=false;$("p-vid").hidden=true};
+
+/* =========================================================
+   1. AUTO WATERMARK DETECTOR (Scans 4 corners & edges for
+      high-contrast text/logo overlays)
+   ========================================================= */
+function autoDetectZone(ctx,W,H){
+  const zw=Math.max(24,Math.round(W*0.34)),zh=Math.max(18,Math.round(H*0.16));
+  const candidates=[
+    {name:"Bottom-Right",x:W-zw-Math.round(W*.01),y:H-zh-Math.round(H*.01),w:zw,h:zh},
+    {name:"Bottom-Left", x:Math.round(W*.01),     y:H-zh-Math.round(H*.01),w:zw,h:zh},
+    {name:"Top-Right",   x:W-zw-Math.round(W*.01),y:Math.round(H*.01),     w:zw,h:zh},
+    {name:"Top-Left",    x:Math.round(W*.01),     y:Math.round(H*.01),     w:zw,h:zh}
+  ];
+  let best=candidates[0],bestScore=-1,tightRect=null;
+  for(const c of candidates){
+    const img=ctx.getImageData(c.x,c.y,c.w,c.h).data;
+    // Estimate background median brightness from outer 2px border of candidate
+    let bgSum=0,bgCnt=0;
+    for(let j=0;j<c.h;j++){
+      for(let i=0;i<c.w;i++){
+        if(i<2||i>=c.w-2||j<2||j>=c.h-2){
+          const idx=(j*c.w+i)*4;
+          bgSum+=0.299*img[idx]+0.587*img[idx+1]+0.114*img[idx+2];
+          bgCnt++;
+        }
+      }
+    }
+    const bgLum=bgSum/Math.max(1,bgCnt);
+    let minX=c.w,minY=c.h,maxX=0,maxY=0,hits=0;
+    for(let j=2;j<c.h-2;j++){
+      for(let i=2;i<c.w-2;i++){
+        const idx=(j*c.w+i)*4,idxR=(j*c.w+i+1)*4,idxD=((j+1)*c.w+i)*4;
+        const lum=0.299*img[idx]+0.587*img[idx+1]+0.114*img[idx+2];
+        const edge=Math.abs(lum-(0.299*img[idxR]+0.587*img[idxR+1]+0.114*img[idxR+2]))
+                  +Math.abs(lum-(0.299*img[idxD]+0.587*img[idxD+1]+0.114*img[idxD+2]));
+        if(edge>38 && Math.abs(lum-bgLum)>24){
+          hits++;
+          if(i<minX)minX=i;if(i>maxX)maxX=i;
+          if(j<minY)minY=j;if(j>maxY)maxY=j;
+        }
+      }
+    }
+    const area=(c.w-4)*(c.h-4),density=hits/Math.max(1,area);
+    // Watermarks usually cover 2% to 45% of a corner zone with sharp text/logo edges
+    const score=(density>0.015 && density<0.55)?hits:hits*0.15;
+    if(score>bestScore){
+      bestScore=score;best=c;
+      if(hits>12 && maxX>minX && maxY>minY){
+        const pad=6;
+        const rx=cl(c.x+minX-pad,2,W-12),ry=cl(c.y+minY-pad,2,H-12);
+        const rw=cl((maxX-minX)+pad*2,12,W-rx-2),rh=cl((maxY-minY)+pad*2,12,H-ry-2);
+        tightRect={name:c.name,x:rx,y:ry,w:rw,h:rh};
+      }else{
+        tightRect={name:c.name,x:c.x,y:c.y,w:c.w,h:c.h};
+      }
+    }
+  }
+  return tightRect||best;
+}
+
+/* =========================================================
+   2. PIXEL-EXACT ONION-PEEL INPAINTING + MICRO-GRAIN
+      (Reconstructs background without blurry smudges)
+   ========================================================= */
+function cleanWatermark(ctx,W,H,rect,smartMode){
+  const x=cl(Math.round(rect.x),2,W-6),y=cl(Math.round(rect.y),2,H-6);
+  const w=cl(Math.round(rect.w),4,W-x-2),h=cl(Math.round(rect.h),4,H-y-2);
+  const pad=3,bx=x-pad,by=y-pad,bw=w+pad*2,bh=h+pad*2;
+  const img=ctx.getImageData(bx,by,bw,bh),d=img.data;
+  const mask=new Uint8Array(bw*bh); // 1 = needs inpainting, 0 = clean background
+
+  // Estimate outer collar average color & natural texture variance
+  let rSum=0,gSum=0,bSum=0,cnt=0,lumSq=0,lumSum=0;
+  for(let j=0;j<bh;j++){
+    for(let i=0;i<bw;i++){
+      if(i<pad||i>=bw-pad||j<pad||j>=bh-pad){
+        const idx=(j*bw+i)*4;
+        rSum+=d[idx];gSum+=d[idx+1];bSum+=d[idx+2];
+        const l=0.299*d[idx]+0.587*d[idx+1]+0.114*d[idx+2];
+        lumSum+=l;lumSq+=l*l;cnt++;
+      }
+    }
+  }
+  const bgR=rSum/cnt,bgG=gSum/cnt,bgB=bSum/cnt;
+  const meanL=lumSum/cnt,stdL=Math.min(7,Math.sqrt(Math.max(0,lumSq/cnt-meanL*meanL))*0.35);
+
+  // Build exact watermark pixel mask (only logo/text pixels, leaving true background untouched!)
+  let maskedCount=0;
+  for(let j=pad;j<bh-pad;j++){
+    for(let i=pad;i<bw-pad;i++){
+      if(!smartMode){
+        mask[j*bw+i]=1;maskedCount++;
+      }else{
+        const idx=(j*bw+i)*4;
+        const diff=Math.abs(d[idx]-bgR)+Math.abs(d[idx+1]-bgG)+Math.abs(d[idx+2]-bgB);
+        if(diff>36){mask[j*bw+i]=1;maskedCount++}
+      }
+    }
+  }
+  // Fallback if smart threshold caught too little
+  if(maskedCount<10){
+    for(let j=pad;j<bh-pad;j++)for(let i=pad;i<bw-pad;i++)mask[j*bw+i]=1;
+  }else if(smartMode){
+    // Dilate mask by 1px to catch anti-aliased text halos
+    const copy=new Uint8Array(mask);
+    for(let j=pad;j<bh-pad;j++){
+      for(let i=pad;i<bw-pad;i++){
+        if(copy[j*bw+i])continue;
+        if(copy[(j-1)*bw+i]||copy[(j+1)*bw+i]||copy[j*bw+i-1]||copy[j*bw+i+1])mask[j*bw+i]=1;
+      }
+    }
+  }
+
+  // Iterative inward onion-peel diffusion from known neighbors
+  let remaining=true,guard=0;
+  while(remaining && guard++<120){
+    remaining=false;
+    const nextMask=new Uint8Array(mask);
+    for(let j=pad;j<bh-pad;j++){
+      for(let i=pad;i<bw-pad;i++){
+        const p=j*bw+i;
+        if(!mask[p])continue;
+        remaining=true;
+        let wr=0,wg=0,wb=0,wt=0;
+        for(let dy=-1;dy<=1;dy++){
+          for(let dx=-1;dx<=1;dx++){
+            if(!dx&&!dy)continue;
+            const np=(j+dy)*bw+(i+dx);
+            if(!mask[np]){
+              const weight=(dx===0||dy===0)?1.4:0.8;
+              const idx=np*4;
+              wr+=d[idx]*weight;wg+=d[idx+1]*weight;wb+=d[idx+2]*weight;wt+=weight;
+            }
+          }
+        }
+        if(wt>0){
+          // Deterministic micro-grain so repaired pixels match surrounding sharpness
+          const grain=(((i*73+j*151)&15)-7.5)*(stdL/7.5);
+          const idx=p*4;
+          d[idx]=cl(Math.round(wr/wt+grain),0,255);
+          d[idx+1]=cl(Math.round(wg/wt+grain),0,255);
+          d[idx+2]=cl(Math.round(wb/wt+grain),0,255);
+          nextMask[p]=0;
+        }
+      }
+    }
+    mask.set(nextMask);
+  }
+  ctx.putImageData(img,bx,by);
+}
+
+/* =========================================================
+   3. DRAGGABLE MANUAL OVERRIDE BOX HELPER
+   ========================================================= */
+function bindBox(boxEl,stageEl,state,onChange){
+  boxEl.onpointerdown=e=>{
+    e.preventDefault();
+    const r=stageEl.getBoundingClientRect(),resize=e.target.classList.contains("h");
+    const sx=e.clientX,sy=e.clientY,ox=state.x,oy=state.y,ow=state.w,oh=state.h;
+    boxEl.setPointerCapture(e.pointerId);
+    boxEl.onpointermove=ev=>{
+      const dx=(ev.clientX-sx)/r.width*state.W,dy=(ev.clientY-sy)/r.height*state.H;
+      if(resize){state.w=cl(ow+dx,14,state.W-state.x-2);state.h=cl(oh+dy,14,state.H-state.y-2)}
+      else{state.x=cl(ox+dx,2,state.W-state.w-2);state.y=cl(oy+dy,2,state.H-state.h-2)}
+      syncBox(boxEl,state);
+    };
+    boxEl.onpointerup=boxEl.onpointercancel=()=>{boxEl.onpointermove=null;onChange&&onChange()};
+  };
+}
+function syncBox(boxEl,s){
+  boxEl.style.left=(s.x/s.W*100)+"%";boxEl.style.top=(s.y/s.H*100)+"%";
+  boxEl.style.width=(s.w/s.W*100)+"%";boxEl.style.height=(s.h/s.H*100)+"%";
+}
+
+/* =========================================================
+   4. AUTO PHOTO WORKFLOW (Runs immediately on file select)
+   ========================================================= */
+const IS={img:new Image(),W:0,H:0,x:0,y:0,w:0,h:0,smart:true,manual:false,name:"photo"};
+bindBox($("bx-img"),$("st-img"),IS,()=>runPhoto());
+
+$("i-toggle-box").onclick=()=>{
+  IS.manual=!IS.manual;
+  $("bx-img").classList.toggle("hidden",!IS.manual);
+  $("i-toggle-box").classList.toggle("on",IS.manual);
+};
+document.querySelectorAll("[data-imode]").forEach(b=>b.onclick=()=>{
+  IS.smart=b.dataset.imode==="smart";
+  document.querySelectorAll("[data-imode]").forEach(x=>x.classList.toggle("on",x===b));
+  runPhoto();
+});
+$("i-run").onclick=()=>runPhoto();
+
+$("f-img").onchange=e=>{
+  const f=e.target.files&&e.target.files[0];if(!f)return;
+  IS.name=f.name.replace(/\.[^.]+$/,"")||"photo";
+  $("w-img").hidden=false;$("res-img").hidden=true;
+  $("st-txt-img").textContent="🔍 वॉटरमार्क स्कैन करके हटाया जा रहा है…";
+  const u=URL.createObjectURL(f);
+  IS.img.onload=()=>{
+    IS.W=IS.img.naturalWidth;IS.H=IS.img.naturalHeight;
+    const c=document.createElement("canvas");c.width=IS.W;c.height=IS.H;
+    const ctx=c.getContext("2d",{willReadFrequently:true});
+    ctx.drawImage(IS.img,0,0);
+    const det=autoDetectZone(ctx,IS.W,IS.H);
+    IS.x=det.x;IS.y=det.y;IS.w=det.w;IS.h=det.h;
+    $("i-zone-lbl").textContent="✅ ऑटो-डिटेक्ट: "+det.name;
+    syncBox($("bx-img"),IS);
+    runPhoto();
+  };
+  IS.img.src=u;$("m-img").src=u;
+};
+
+function runPhoto(){
+  if(!IS.W)return;
+  const c=document.createElement("canvas");c.width=IS.W;c.height=IS.H;
+  const ctx=c.getContext("2d",{willReadFrequently:true});
+  ctx.drawImage(IS.img,0,0);
+  cleanWatermark(ctx,IS.W,IS.H,IS,IS.smart);
+  const out=c.toDataURL("image/png");
+  const r=$("res-img");r.hidden=false;
+  r.innerHTML=`<img src="${out}" alt="Clean"><a class="go dl" href="${out}" download="${IS.name}_clean.png">⬇️ साफ HD फोटो डाउनलोड करें</a>`;
+  $("st-txt-img").textContent="✅ वॉटरमार्क पूरी तरह साफ हो गया!";
+}
+
+/* =========================================================
+   5. AUTO VIDEO WORKFLOW (Auto-detects & starts immediately)
+   ========================================================= */
+const VS={url:null,W:0,H:0,x:0,y:0,w:0,h:0,smart:true,manual:false,busy:false,runId:0,name:"video"};
+bindBox($("bx-vid"),$("st-vid"),VS,()=>startVideoClean());
+
+$("v-toggle-box").onclick=()=>{
+  VS.manual=!VS.manual;
+  $("bx-vid").class
