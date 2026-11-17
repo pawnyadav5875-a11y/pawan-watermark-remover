@@ -32,12 +32,12 @@ body{margin:0;background:radial-gradient(1000px 500px at 50% -10%,#1e1b4b 0%,var
 .tab.active{background:linear-gradient(135deg,var(--pri),#8b5cf6);color:#fff;border-color:transparent}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:14px}
 .sec-title{font-size:.92rem;font-weight:700;margin-bottom:10px;display:flex;justify-content:space-between}
-.upload-zone{border:2px dashed #334155;border-radius:14px;padding:24px 14px;text-align:center;background:rgba(22,32,53,.5);cursor:pointer;display:block}
+.upload-zone{border:2px dashed #4f46e5;border-radius:14px;padding:24px 14px;text-align:center;background:rgba(22,32,53,.7);cursor:pointer;display:block;width:100%;color:var(--txt)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:14px 18px;font-size:1rem;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--pri),#8b5cf6);cursor:pointer;width:100%}
 .btn.red{background:linear-gradient(135deg,#e11d48,#f97316)}
 .btn.green{background:linear-gradient(135deg,#059669,#10b981)}
 .btn:disabled{opacity:.5;cursor:not-allowed}
-input[type=file]{display:none}
+.file-hidden{position:fixed;left:-9999px;top:-9999px;opacity:0}
 .stage{position:relative;width:100%;background:#000;border-radius:12px;overflow:hidden;line-height:0;user-select:none}
 .stage video,.stage img{width:100%;display:block;max-height:66vh;object-fit:contain}
 .ov{position:absolute;inset:0;touch-action:none;pointer-events:none}
@@ -89,8 +89,8 @@ input[type=range]{width:100%;accent-color:var(--acc);height:26px}
   <div id="secVid">
     <div id="isoWarn" class="warn hide"></div>
     <div class="card">
-      <label class="upload-zone" for="file"><strong style="font-size:1.05rem">📁 वीडियो चुनें / Select Video</strong><div style="color:var(--mut);font-size:.8rem;margin-top:4px">MP4, MOV, MKV, WEBM • Bina App Ke Video Se Watermark Hataye</div></label>
-      <input id="file" type="file" accept="video/*">
+      <button type="button" class="upload-zone" id="pickVidBtn"><strong style="font-size:1.05rem">📁 वीडियो चुनें / Select Video</strong><div style="color:var(--mut);font-size:.8rem;margin-top:4px">MP4, MOV, MKV, WEBM • Bina App Ke Video Se Watermark Hataye</div></button>
+      <input id="file" class="file-hidden" type="file" accept="video/mp4,video/x-m4v,video/*,.mp4,.mov,.mkv,.webm">
       <div id="fname" class="msg" style="text-align:center;color:#a5b4fc;font-weight:600"></div>
     </div>
     <div id="editor" class="hide">
@@ -140,8 +140,8 @@ input[type=range]{width:100%;accent-color:var(--acc);height:26px}
   <!-- IMAGE / PHOTO SECTION -->
   <div id="secImg" class="hide">
     <div class="card">
-      <label class="upload-zone" for="ifile"><strong style="font-size:1.05rem">🖼️ फोटो चुनें / Select Photo or Image</strong><div style="color:var(--mut);font-size:.8rem;margin-top:4px">JPG, PNG, WEBP • Photo Se Watermark / Logo / Text Hataye</div></label>
-      <input id="ifile" type="file" accept="image/*">
+      <button type="button" class="upload-zone" id="pickImgBtn"><strong style="font-size:1.05rem">🖼️ फोटो चुनें / Select Photo or Image</strong><div style="color:var(--mut);font-size:.8rem;margin-top:4px">JPG, PNG, WEBP • Photo Se Watermark / Logo / Text Hataye</div></button>
+      <input id="ifile" class="file-hidden" type="file" accept="image/*">
       <div id="ifname" class="msg" style="text-align:center;color:#a5b4fc;font-weight:600"></div>
     </div>
     <div id="ieditor" class="hide">
@@ -190,12 +190,14 @@ input[type=range]{width:100%;accent-color:var(--acc);height:26px}
 (function(){
 "use strict";
 const $=id=>document.getElementById(id),CORE="https://unpkg.com/@ffmpeg/core@0.11.0/dist/ffmpeg-core.js",M=2,MAX=2*1024*1024*1024-67108864;
+$("pickVidBtn").onclick=()=>{$("file").value="";$("file").click()};
+$("pickImgBtn").onclick=()=>{$("ifile").value="";$("ifile").click()};
 $("tabVid").onclick=()=>{$("tabVid").classList.add("active");$("tabImg").classList.remove("active");$("secVid").classList.remove("hide");$("secImg").classList.add("hide")};
 $("tabImg").onclick=()=>{$("tabImg").classList.add("active");$("tabVid").classList.remove("active");$("secImg").classList.remove("hide");$("secVid").classList.add("hide");irender()};
 
 // VIDEO LOGIC
 const S={file:null,url:null,vw:0,vh:0,x:0,y:0,w:0,h:0,ff:null,busy:false,outUrl:null},logs=[],video=$("video"),box=$("box");
-if(typeof SharedArrayBuffer==="undefined"||!window.crossOriginIsolated){$("isoWarn").textContent="⚠️ Chrome ब्राउज़र का उपयोग करें या पेज रीलोड करें।";$("isoWarn").classList.remove("hide")}
+if(typeof SharedArrayBuffer==="undefined"||!window.crossOriginIsolated){$("isoWarn").textContent="⚠️ सर्वर पर COOP/COEP हेडर्स सक्रिय नहीं हैं। नीचे दिया गया server.py अपडेट करें।";$("isoWarn").classList.remove("hide")}
 const cl=(v,a,b)=>Math.min(Math.max(v,a),b),minW=()=>Math.min(16,Math.max(2,S.vw-2*M)),minH=()=>Math.min(16,Math.max(2,S.vh-2*M));
 function clampBox(){const mw=Math.max(2,S.vw-2*M),mh=Math.max(2,S.vh-2*M);S.w=Math.round(cl(S.w,minW(),mw));S.h=Math.round(cl(S.h,minH(),mh));S.x=Math.round(cl(S.x,M,S.vw-M-S.w));S.y=Math.round(cl(S.y,M,S.vh-M-S.h))}
 function render(){if(!S.vw||!video.clientWidth)return;const k=video.clientWidth/S.vw;box.style.left=(S.x*k)+"px";box.style.top=(S.y*k)+"px";box.style.width=(S.w*k)+"px";box.style.height=(S.h*k)+"px";$("sx").value=S.x;$("sy").value=S.y;$("sw").value=S.w;$("sh").value=S.h;$("vx").textContent=S.x+"px";$("vy").textContent=S.y+"px";$("vw").textContent=S.w+"px";$("vh").textContent=S.h+"px"}
@@ -211,4 +213,4 @@ let drag=null;box.addEventListener("pointerdown",e=>{if(S.busy)return;drag={mode
 box.addEventListener("pointermove",e=>{if(!drag||!video.clientWidth)return;const k=S.vw/video.clientWidth,dx=(e.clientX-drag.sx)*k,dy=(e.clientY-drag.sy)*k,m=drag.mode;let L=drag.ox,T=drag.oy,R=drag.ox+drag.ow,B=drag.oy+drag.oh;if(m==="move"){L=cl(drag.ox+dx,M,S.vw-M-drag.ow);T=cl(drag.oy+dy,M,S.vh-M-drag.oh);R=L+drag.ow;B=T+drag.oh}else{if(m.indexOf("w")>=0)L=cl(drag.ox+dx,M,R-minW());if(m.indexOf("e")>=0)R=cl(drag.ox+drag.ow+dx,L+minW(),S.vw-M);if(m.indexOf("n")>=0)T=cl(drag.oy+dy,M,B-minH());if(m.indexOf("s")>=0)B=cl(drag.oy+drag.oh+dy,T+minH(),S.vh-M)}S.x=Math.round(L);S.y=Math.round(T);S.w=Math.round(R-L);S.h=Math.round(B-T);clampBox();render();e.preventDefault()});
 const endDrag=()=>{drag=null};box.addEventListener("pointerup",endDrag);box.addEventListener("pointercancel",endDrag);
 async function loadFF(){if(S.ff)return S.ff;const ff=FFmpeg.createFFmpeg({log:true,corePath:CORE});ff.setLogger(({message})=>{logs.push(String(message));if(logs.length>30)logs.shift()});await ff.load();S.ff=ff;return ff}
-function buildArgs(inName,outName,audioArgs){clampBox();const{x,y,w,h}=S,mode=document.querySelector('input[name=mode]:checked').value,preset=document.querySelector('input[name=speed]:checked').value,crf=preset==="fast"?"20":"23",even="scale=trunc(iw/2)*2:trunc(ih/2)*2";let args;if(mode==="delogo"){args=["-i",inName,"-vf",`delogo=x=${x}:y=${y}:w=${w}:h=${h},${even}`,"-map","0:v:0","-map","0:a?"]}else{const bw=Math
+function buildArgs(inName,outName,audioArgs){clampBox();const{x,
