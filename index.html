@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090b14">
+<meta name="description" content="Pawan Studio AI - Free 1-Click AI Background Remover, Magic Brush Object Eraser & AI Image Generator.">
+<link rel="canonical" href="https://pawan-watermark-remover-4.onrender.com/">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1040/1040230.png">
+<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/1040/1040230.png">
+<title>Pawan Studio AI - Background Remover, Magic Eraser & AI Image Generator</title>
+<style>
+:root{--bg:#070913;--card:#101626;--card2:#172036;--line:#263352;--txt:#f8fafc;--mut:#94a3b8;--pri:#7c3aed;--cyan:#06b6d4;--ok:#16a34a}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:radial-gradient(950px 500px at 50% -10%,#241b54 0,var(--bg) 65%);color:var(--txt);font-family:system-ui,-apple-system,sans-serif;line-height:1.6}
+header{background:rgba(7,9,19,.94);border-bottom:1px solid var(--line);padding:12px 16px;position:sticky;top:0;z-index:30;backdrop-filter:blur(10px)}
+.nav{max-width:980px;margin:auto;display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:19px}
+.app-btn{background:linear-gradient(135deg,var(--pri),var(--cyan));color:#fff;border:0;padding:8px 15px;border-radius:99px;font:700 12px inherit;cursor:pointer}
+.w{max-width:980px;margin:auto;padding:18px 14px 60px}
+.hero{text-align:center;padding:16px 0 18px}
+.hero h1{font-size:clamp(24px,5vw,38px);margin:0 0 8px;line-height:1.18}
+.grad{background:linear-gradient(90deg,#a78bfa,#67e8f9);-webkit-background-clip:text;color:transparent}
+.hero p{color:var(--mut);font-size:13.5px;max-width:640px;margin:auto}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.tab{border:1px solid var(--line);background:var(--card2);color:var(--mut);padding:12px 8px;border-radius:13px;font:750 13px inherit;cursor:pointer;text-align:center}
+.tab.on{background:linear-gradient(135deg,#6d28d9,#2563eb);color:#fff;border-color:transparent}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 20px 50px #0007;margin-bottom:20px}
+.drop{position:relative;border:2px dashed #6366f1;border-radius:16px;background:var(--card2);padding:30px 16px;text-align:center;overflow:hidden;cursor:pointer}
+.drop input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:2;font-size:100px}
+.stage{position:relative;background:repeating-conic-gradient(#1e293b 0% 25%,#0f172a 0% 50%) 50%/20px 20px;border-radius:14px;overflow:hidden;display:flex;justify-content:center;align-items:center;min-height:220px}
+.stage img,.stage canvas{max-width:100%;max-height:500px;display:block;object-fit:contain}
+.brush-wrap{position:relative;display:inline-block;touch-action:none}
+#bMask{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;touch-action:none}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:10px 0;font-size:13px;color:#cbd5e1}
+.row input[type=range]{width:48%;accent-color:#8b5cf6}
+.btns{display:flex;gap:9px;margin-top:14px}
+.btn{flex:1;padding:13px;border-radius:12px;border:1px solid var(--line);background:var(--card2);color:#fff;font:700 13.5px inherit;cursor:pointer}
+.btn.pri{background:linear-gradient(110deg,#7c3aed,#2563eb);border:0}
+.btn.red{background:#4c1d2a;border-color:#7f1d1d}
+.st{text-align:center;font-size:13.5px;color:#67e8f9;margin:12px 0 0;font-weight:600}
+.dl{display:block;text-align:center;background:var(--ok);color:#fff;text-decoration:none;padding:14px;border-radius:12px;font-weight:800;font-size:15px;margin-top:12px}
+textarea,select{width:100%;background:var(--card2);border:1px solid var(--line);color:#fff;border-radius:12px;padding:12px;font:500 14px inherit;margin-top:8px}
+.hide{display:none!important}
+footer{text-align:center;color:var(--mut);font-size:12px;padding-top:20px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div>✦ Pawan <span style="color:#a78bfa">Studio AI</span></div>
+    <button class="app-btn" id="instBtn" type="button">📲 Install App</button>
+  </div>
+</header>
+<div class="w">
+  <div class="hero">
+    <h1>Pro AI Photo &amp; <span class="grad">Creator Studio</span></h1>
+    <p>असली AI मॉडल से 1-क्लिक में बैकग्राउंड हटाएं, मैजिक ब्रश से दाग-वॉटरमार्क मिटाएं और फ्री 3D/HD इमेज बनाएं।</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab on" id="tabBg" type="button">✂️ AI BG Remover</button>
+    <button class="tab" id="tabEr" type="button">🪄 Magic Brush Eraser</button>
+    <button class="tab" id="tabGen" type="button">🎨 AI Image Maker</button>
+  </div>
+
+  <!-- TOOL 1: REAL AI BACKGROUND REMOVER -->
+  <div class="card" id="secBg">
+    <div class="drop">
+      <div style="pointer-events:none">
+        <div style="font-size:38px">✂️</div>
+        <strong style="font-size:17px">1-Click AI Background Remover</strong>
+        <div style="font-size:13px;color:var(--mut);margin-top:5px">फोटो चुनें — असली Neural Network AI बाल-बाल बैकग्राउंड साफ़ करेगा</div>
+      </div>
+      <input id="bgIn" type="file" accept="image/*">
+    </div>
+    <div class="st" id="bgSt"></div>
+    <div id="bgWork" class="hide" style="margin-top:14px">
+      <div class="stage"><img id="bgOut" alt="Transparent Result"></div>
+      <a id="bgDl" class="dl" href="#" download="pawan-studio-nobg.png">⬇ HD Transparent PNG डाउनलोड करें</a>
+    </div>
+  </div>
+
+  <!-- TOOL 2: PRECISION BRUSH MAGIC ERASER -->
+  <div class="card hide" id="secEr">
+    <div class="drop">
+      <div style="pointer-events:none">
+        <div style="font-size:38px">🪄</div>
+        <strong style="font-size:17px">Magic Brush Object &amp; Watermark Eraser</strong>
+        <div style="font-size:13px;color:var(--mut);margin-top:5px">फोटो चुनें और उँगली से सिर्फ़ वॉटरमार्क या दाग पर ब्रश चलाएं</div>
+      </div>
+      <input id="erIn" type="file" accept="image/*">
+    </div>
+    <div id="erWork" class="hide" style="margin-top:14px">
+      <div class="stage">
+        <div class="brush-wrap">
+          <canvas id="erC"></canvas>
+          <canvas id="bMask"></canvas>
+        </div>
+      </div>
+      <div class="row"><span>Brush Size (ब्रश का साइज)</span><input id="bSz" type="range" min="8" max="60" value="24"><b id="vSz">24px</b></div>
+      <div class="btns">
+        <button class="btn pri" id="bErase" type="button">✨ Erase Marked Area</button>
+        <button class="btn red" id="bClear" type="button">↺ Clear Brush</button>
+      </div>
+      <div class="st" id="erSt"></div>
+      <a id="erDl" class="dl hide" href="#" download="pawan-studio-clean.png">⬇ साफ़ फोटो डाउनलोड करें</a>
+    </div>
+  </div>
+
+  <!-- TOOL 3: FREE AI IMAGE & THUMBNAIL GENERATOR -->
+  <div class="card hide" id="secGen">
+    <strong style="font-size:16px">🎨 Free AI 3D &amp; Thumbnail Image Generator</strong>
+    <textarea id="prTxt" rows="3" placeholder="यहाँ लिखें क्या बनाना है... जैसे: Cute 3D Indian village boy smiling in sunlight, Pixar 3D animation style, 8k ultra detailed"></textarea>
+    <div class="row" style="margin-top:10px">
+      <span>Image Size:</span>
+      <select id="imSz" style="width:62%;margin:0">
+        <option value="1280x720">YouTube Thumbnail (16:9 HD)</option>
+        <option value="1080x1920">Shorts / Reels (9:16 Vertical)</option>
+        <option value="1024x1024">Square Logo / Post (1:1)</option>
+      </select>
+    </div>
+    <button class="btn pri" id="bGen" type="button" style="width:100%;margin-top:12px">🚀 Generate Free HD AI Image</button>
+    <div class="st" id="genSt"></div>
+    <div id="genWork" class="hide" style="margin-top:14px">
+      <div class="stage"><img id="genOut" crossorigin="anonymous" alt="AI Generated"></div>
+      <a id="genDl" class="dl" href="#" download="pawan-studio-ai.jpg">⬇ HD AI Image डाउनलोड करें</a>
+    </div>
+  </div>
+
+  <footer>© 2026 Pawan Studio AI • Real Neural Network Background Remover, Magic Eraser &amp; AI Generator</footer>
+        </div>
+  <script type="module">
+import { removeBackground } from "https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/+esm";
+
+const $=id=>document.getElementById(id),cl=(v,a,b)=>Math.max(a,Math.min(b,v));
+let dp=null;
+
+if("serviceWorker"in navigator)navigator.serviceWorker.register("/sw.js").catch(()=>{});
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e});
+$("instBtn").onclick=async()=>{if(dp){dp.prompt();await dp.userChoice;dp=null}else alert("Chrome के ऊपर दाईं तरफ 3 डॉट्स (⋮) दबाएं और 'Install app' या 'Add to Home screen' चुनें!")};
+
+// Tab Switcher
+const tabs=[["tabBg","secBg"],["tabEr","secEr"],["tabGen","secGen"]];
+tabs.forEach(([tb,sc])=>{
+  $(tb).onclick=()=>{
+    tabs.forEach(([t,s])=>{$(t).classList.remove("on");$(s).classList.add("hide")});
+    $(tb).classList.add("on");$(sc).classList.remove("hide");
+  };
+});
+
+// 1. REAL NEURAL NETWORK AI BACKGROUND REMOVER
+$("bgIn").onchange=async e=>{
+  const f=e.target.files&&e.target.files[0];if(!f)return;
+  $("bgWork").classList.add("hide");
+  $("bgSt").textContent="⏳ असली AI मॉडल लोड होकर बैकग्राउंड साफ़ कर रहा है (पहली बार 10-15 सेकंड लगेंगे)…";
+  try{
+    const blob=await removeBackground(f,{progress:(k,cur,tot)=>{
+      if(tot>0)$("bgSt").textContent="🤖 AI Processing: "+Math.round((cur/tot)*100)+"%";
+    }});
+    const u=URL.createObjectURL(blob);
+    $("bgOut").src=u;$("bgDl").href=u;
+    $("bgWork").classList.remove("hide");
+    $("bgSt").textContent="✅ बैकग्राउंड पूरी तरह साफ़ हो गया!";
+  }catch(err){
+    $("bgSt").textContent="❌ Error: इंटरनेट कनेक्शन चेक करें या छोटी फोटो चुनें।";
+  }
+};
+    // 2. PRECISION FINGER BRUSH MAGIC ERASER
+const erC=$("erC"),bMask=$("bMask"),eCtx=erC.getContext("2d",{willReadFrequently:true}),mCtx=bMask.getContext("2d",{willReadFrequently:true});
+let drawing=false,origImg=null;
+$("bSz").oninput=e=>$("vSz").textContent=e.target.value+"px";
+
+$("erIn").onchange=e=>{
+  const f=e.target.files&&e.target.files[0];if(!f)return;
+  const img=new Image();
+  img.onload=()=>{
+    const sc=Math.min(1,1280/Math.max(img.width,img.height));
+    erC.width=bMask.width=Math.round(img.width*sc);
+    erC.height=bMask.height=Math.round(img.height*sc);
+    eCtx.drawImage(img,0,0,erC.width,erC.height);
+    origImg=eCtx.getImageData(0,0,erC.width,erC.height);
+    mCtx.clearRect(0,0,bMask.width,bMask.height);
+    $("erWork").classList.remove("hide");$("erDl").classList.add("hide");
+    $("erSt").textContent="👆 उँगली से सिर्फ़ वॉटरमार्क या दाग पर लाल रंग फेरें, फिर 'Erase' दबाएं";
+  };
+  img.src=URL.createObjectURL(f);
+};
+
+function paint(ev){
+  const r=bMask.getBoundingClientRect(),sx=bMask.width/r.width,sy=bMask.height/r.height;
+  const x=(ev.clientX-r.left)*sx,y=(ev.clientY-r.top)*sy,rad=(+$("bSz").value||24)*sx*0.5;
+  mCtx.fillStyle="rgba(239,68,68,0.65)";mCtx.beginPath();mCtx.arc(x,y,rad,0,Math.PI*2);mCtx.fill();
+}
+bMask.onpointerdown=e=>{e.preventDefault();drawing=true;bMask.setPointerCapture(e.pointerId);paint(e)};
+bMask.onpointermove=e=>{if(drawing)paint(e)};
+bMask.onpointerup=bMask.onpointercancel=()=>{drawing=false};
+
+$("bClear").onclick=()=>{if(origImg)eCtx.putImageData(origImg,0,0);mCtx.clearRect(0,0,bMask.width,bMask.height);$("erDl").classList.add("hide")};
+
+$("bErase").onclick=()=>{
+  const W=erC.width,H=erC.height,img=eCtx.getImageData(0,0,W,H),d=img.data,md=mCtx.getImageData(0,0,W,H).data;
+  const mk=new Uint8Array(W*H);let cnt=0;
+  for(let i=0;i<W*H;i++)if(md[i*4+3]>20){mk[i]=1;cnt++}
+  if(!cnt){$("erSt").textContent="⚠️ पहले उँगली से वॉटरमार्क पर ब्रश फेरें!";return}
+  let left=true,g=0;
+  while(left&&g++<180){
+    left=false;const nx=new Uint8Array(mk);
+    for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++){
+      const idx=y*W+x;if(!mk[idx])continue;left=true;let wr=0,wg=0,wb=0,wt=0;
+      for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){
+        if(!dx&&!dy)continue;const n=(y+dy)*W+(x+dx);
+        if(!mk[n]){const w=(!dx||!dy)?1.6:.75,p=n*4;wr+=d[p]*w;wg+=d[p+1]*w;wb+=d[p+2]*w;wt+=w}
+      }
+      if(wt>0){const p=idx*4;d[p]=Math.round(wr/wt);d[p+1]=Math.round(wg/wt);d[p+2]=Math.round(wb/wt);nx[idx]=0}
+    }
+    mk.set(nx);
+  }
+  eCtx.putImageData(img,0,0);mCtx.clearRect(0,0,W,H);
+  $("erDl").href=erC.toDataURL("image/png");$("erDl").classList.remove("hide");
+  $("erSt").textContent="✅ साफ़ हो गया! अगर हल्का निशान बचे तो दोबारा ब्रश फेर दें।";
+};
+
+// 3. FREE AI IMAGE & THUMBNAIL GENERATOR
+$("bGen").onclick=async()=>{
+  const p=$("prTxt").value.trim();if(!p){$("genSt").textContent="⚠️ पहले कुछ लिखें कि क्या बनाना है!";return}
+  const [w,h]=$("imSz").value.split("x"),seed=Math.floor(Math.random()*999999);
+  $("genSt").textContent="🎨 AI आपकी HD इमेज बना रहा है (5-10 सेकंड रुकें)…";$("genWork").classList.add("hide");
+  const url=`https://image.pollinations.ai/prompt/${encodeURIComponent(p)}?width=${w}&height=${h}&seed=${seed}&nologo=true&model=flux`;
+  const img=$("genOut");
+  img.onload=async()=>{
+    $("genWork").classList.remove("hide");$("genSt").textContent="✅ HD AI इमेज तैयार है!";
+    try{const r=await fetch(url);const b=await r.blob();$("genDl").href=URL.createObjectURL(b)}catch(_){$("genDl").href=url}
+  };
+  img.onerror=()=>{$("genSt").textContent="❌ सर्वर व्यस्त है, कृपया दोबारा बटन दबाएं।"};
+  img.src=url;
+};
+</script>
+</body>
+</html>
