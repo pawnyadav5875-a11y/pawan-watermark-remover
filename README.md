@@ -1,1 +1,0 @@
-# pawan-watermark-remover
