@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090b14">
+<meta name="robots" content="index,follow">
+<meta name="google-site-verification" content="PASTE_GOOGLE_CODE_HERE" />
+<meta name="description" content="Pawan Studio - Deep AI Video and Photo Watermark Remover. Frame-by-frame precision scanning and invisible watermark removal.">
+<link rel="canonical" href="https://pawan-watermark-remover-1.onrender.com/">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1040/1040230.png">
+<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/1040/1040230.png">
+<title>Pawan Studio - Deep AI Video & Photo Watermark Remover</title>
+<style>
+:root{--bg:#090b14;--card:#111625;--card2:#182036;--line:#283452;--txt:#f8fafc;--mut:#94a3b8;--ok:#16a34a}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:radial-gradient(900px 450px at 50% -10%,#251e54 0,var(--bg) 65%);color:var(--txt);font-family:system-ui,-apple-system,sans-serif;line-height:1.6}
+header{background:rgba(9,11,20,.94);border-bottom:1px solid var(--line);padding:12px 16px;position:sticky;top:0;z-index:20}
+.nav{max-width:960px;margin:auto;display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:19px}
+.app-btn{background:linear-gradient(135deg,#7c3aed,#06b6d4);color:#fff;border:0;padding:8px 15px;border-radius:99px;font:700 12px inherit;cursor:pointer}
+.w{max-width:960px;margin:auto;padding:18px 14px 60px}
+.hero{text-align:center;padding:20px 0 16px}
+.hero h1{font-size:clamp(24px,5vw,38px);margin:0 0 8px;line-height:1.18}
+.grad{background:linear-gradient(90deg,#a78bfa,#67e8f9);-webkit-background-clip:text;color:transparent}
+.hero p{color:var(--mut);font-size:13.5px;max-width:620px;margin:auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 20px 50px #0006;margin-bottom:22px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.tab{border:1px solid var(--line);background:var(--card2);color:var(--mut);padding:14px;border-radius:13px;font:750 15px inherit;cursor:pointer}
+.tab.on{background:linear-gradient(135deg,#6d28d9,#2563eb);color:#fff;border-color:transparent}
+.drop{position:relative;border:2px dashed #6366f1;border-radius:16px;background:var(--card2);padding:32px 16px;text-align:center;overflow:hidden;cursor:pointer}
+.drop input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:2;font-size:100px}
+.info{text-align:center;font-size:13px;color:#a5b4fc;margin-top:10px;font-weight:600}
+.stage{position:relative;background:#000;border-radius:13px;overflow:hidden;display:flex;justify-content:center;align-items:center;min-height:180px}
+.stage img,.stage video,.stage canvas{max-width:100%;max-height:520px;display:none;object-fit:contain}
+.stage .vis{display:block}
+.scan-beam{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 0%,rgba(34,211,238,.22) 50%,transparent 100%);height:28%;animation:beam 1.6s linear infinite;z-index:3}
+@keyframes beam{0%{top:-30%}100%{top:105%}}
+.sel{position:absolute;border:2px solid #22d3ee;background:rgba(34,211,238,.18);box-shadow:0 0 0 9999px rgba(0,0,0,.45);display:none;touch-action:none;cursor:move;z-index:4}
+.sel.on{display:block}
+.hd{position:absolute;right:-3px;bottom:-3px;width:28px;height:28px;background:#22d3ee;border-radius:6px 0 0 0;touch-action:none;cursor:nwse-resize}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:11px 0;font-size:13px;color:#cbd5e1}
+.row input[type=range]{width:46%;accent-color:#8b5cf6}
+.btns{display:flex;gap:9px;margin-top:14px;position:relative;z-index:5}
+.btn{flex:1;padding:13px;border-radius:12px;border:1px solid var(--line);background:var(--card2);color:#fff;font:700 13px inherit;cursor:pointer}
+.btn.pri{background:linear-gradient(110deg,#7c3aed,#2563eb);border:0}
+.btn.red{background:#4c1d2a;border-color:#7f1d1d}
+.bar{height:10px;background:#090b14;border-radius:99px;overflow:hidden;margin-top:14px;border:1px solid var(--line)}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#8b5cf6,#06b6d4);transition:width .15s}
+.st{text-align:center;font-size:13px;color:#67e8f9;margin:9px 0 0;font-weight:600}
+.res{margin-top:16px;padding:16px;background:#0f291e;border:1px solid #166534;border-radius:15px}
+.res img,.res video{width:100%;max-height:480px;object-fit:contain;border-radius:10px;display:block;background:#000;margin:10px 0}
+.dl{display:block;text-align:center;background:var(--ok);color:#fff;text-decoration:none;padding:14px;border-radius:11px;font-weight:800;font-size:15px;margin-top:10px}
+.hide{display:none!important}
+footer{text-align:center;color:var(--mut);font-size:12px;padding-top:20px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div>✦ Pawan <span style="color:#a78bfa">Studio</span></div>
+    <button class="app-btn" id="instBtn" type="button">📲 Install App</button>
+  </div>
+</header>
+<div class="w">
+  <div class="hero">
+    <h1>Deep AI Video &amp; Photo <span class="grad">Watermark Remover</span></h1>
+    <p>हर एक फ्रेम को गहराई से स्कैन करता है और एक तरफ से वॉटरमार्क को इस तरह साफ़ करता है कि निशान तक न बचे।</p>
+  </div>
+  <div class="card">
+    <div class="tabs">
+      <button class="tab on" id="tImg" type="button">📷 Photo Remover</button>
+      <button class="tab" id="tVid" type="button">🎬 Video Remover</button>
+    </div>
+    <div class="drop">
+      <div style="pointer-events:none">
+        <div style="font-size:38px">☁️</div>
+        <strong id="uTit" style="font-size:17px">Choose Your Photo</strong>
+        <div id="uSub" style="font-size:13px;color:var(--mut);margin-top:5px">यहाँ टैप करके फोटो चुनें — डीप स्कैन और क्लीनिंग शुरू होगी</div>
+      </div>
+      <input id="fIn" type="file" accept="image/*">
+    </div>
+    <div class="info" id="fInf"></div>
+    <div id="work" class="hide" style="margin-top:16px">
+      <div class="stage" id="stg">
+        <img id="pImg" alt="Photo"><video id="pVid" playsinline controls muted></video><canvas id="outC"></canvas>
+        <div class="scan-beam hide" id="beam"></div>
+        <div class="sel" id="sel"><div class="hd" id="hd"></div></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-top:7px"><span id="zLbl">Deep Scan Ready</span><span id="dim"></span></div>
+      <div style="background:var(--card2);padding:13px;border-radius:13px;margin-top:13px;border:1px solid var(--line)">
+        <div class="row"><span>Deep Sensitivity (बारीक स्कैन)</span><input id="sens" type="range" min="10" max="85" value="24"><b id="vSens">24</b></div>
+        <div class="row"><span>Natural Texture (असली पिक्सेल मैच)</span><input id="grn" type="range" min="0" max="100" value="38"><b id="vGrn">38%</b></div>
+        <div class="row"><span>Manual Box (छोटा/कहीं भी सेट करें)</span><input id="mChk" type="checkbox" style="width:18px;height:18px"></div>
+        <div class="row"><span>Video में Audio रखें</span><input id="aChk" type="checkbox" checked style="width:18px;height:18px"></div>
+      </div>
+      <div class="btns">
+        <button class="btn pri" id="bRun" type="button">✦ Deep Scan &amp; Clean</button>
+        <button class="btn" id="bBox" type="button">▣ Manual Box</button>
+        <button class="btn red" id="bRst" type="button">↺ Reset</button>
+      </div>
+      <div id="pArea" class="hide"><div class="bar"><i id="pBar"></i></div><div class="st" id="stTxt"></div></div>
+      <div id="res" class="res hide"><strong style="color:#86efac;font-size:16px">✅ वॉटरमार्क पूरी तरह अदृश्य हो गया!</strong><div id="rMed"></div><a id="dl" class="dl" href="#" download="pawan-studio-clean.png">⬇ साफ फाइल डाउनलोड करें</a></div>
+    </div>
+  </div>
+  <footer>© 2026 Pawan Studio • Deep AI Video &amp; Photo Watermark Remover • Privacy Policy: Local Browser Processing</footer>
+  </div>
+  <script>
+(()=>{
+"use strict";
+const $=id=>document.getElementById(id),cl=(v,a,b)=>Math.max(a,Math.min(b,v));
+const S={mode:"photo",file:null,url:null,W:0,H:0,rect:{x:0,y:0,w:0,h:0,name:"Bottom-Right"},runId:0,dp:null};
+const pImg=$("pImg"),pVid=$("pVid"),outC=$("outC"),sel=$("sel"),hd=$("hd"),beam=$("beam");
+
+if("serviceWorker"in navigator)navigator.serviceWorker.register("/sw.js").catch(()=>{});
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();S.dp=e});
+$("instBtn").onclick=async()=>{if(S.dp){S.dp.prompt();await S.dp.userChoice;S.dp=null}else alert("Chrome के ऊपर दाईं तरफ 3 डॉट्स (⋮) दबाएं और 'Add to Home screen' या 'Install app' चुनें!")};
+
+function setMode(m){
+  S.mode=m;$("tImg").classList.toggle("on",m==="photo");$("tVid").classList.toggle("on",m==="video");
+  $("uTit").textContent=m==="photo"?"Choose Your Photo":"Choose Your Video";
+  $("uSub").textContent=m==="photo"?"यहाँ टैप करके फोटो चुनें — डीप स्कैन और क्लीनिंग शुरू होगी":"यहाँ टैप करके वीडियो चुनें — हर फ्रेम का डीप स्कैन और क्लीनिंग शुरू होगी";
+  $("fIn").accept=m==="photo"?"image/*":"video/*";$("work").classList.add("hide");$("res").classList.add("hide");$("fInf").textContent="";
+}
+$("tImg").onclick=()=>setMode("photo");$("tVid").onclick=()=>setMode("video");
+$("sens").oninput=e=>$("vSens").textContent=e.target.value;$("grn").oninput=e=>$("vGrn").textContent=e.target.value+"%";
+$("mChk").onchange=e=>{sel.classList.toggle("on",e.target.checked);syncBox()};
+$("bBox").onclick=()=>{$("mChk").checked=!$("mChk").checked;sel.classList.toggle("on",$("mChk").checked);syncBox()};
+
+function syncBox(){
+  if(!S.W||!S.H)return;
+  const el=outC.classList.contains("vis")?outC:(S.mode==="photo"?pImg:pVid);
+  const sR=$("stg").getBoundingClientRect(),eR=el.getBoundingClientRect();if(!eR.width)return;
+  sel.style.left=((eR.left-sR.left)+(S.rect.x/S.W)*eR.width)+"px";sel.style.top=((eR.top-sR.top)+(S.rect.y/S.H)*eR.height)+"px";
+  sel.style.width=((S.rect.w/S.W)*eR.width)+"px";sel.style.height=((S.rect.h/S.H)*eR.height)+"px";
+}
+window.addEventListener("resize",syncBox);
+
+sel.onpointerdown=e=>{
+  e.preventDefault();const el=outC.classList.contains("vis")?outC:(S.mode==="photo"?pImg:pVid);
+  const eR=el.getBoundingClientRect();if(!eR.width)return;
+  const rz=e.target===hd,sx=e.clientX,sy=e.clientY,ox=S.rect.x,oy=S.rect.y,ow=S.rect.w,oh=S.rect.h;
+  sel.setPointerCapture(e.pointerId);
+  sel.onpointermove=ev=>{
+    const dx=((ev.clientX-sx)/eR.width)*S.W,dy=((ev.clientY-sy)/eR.height)*S.H;
+    if(rz){S.rect.w=Math.round(cl(ow+dx,8,S.W-S.rect.x-2));S.rect.h=Math.round(cl(oh+dy,8,S.H-S.rect.y-2))}
+    else{S.rect.x=Math.round(cl(ox+dx,2,S.W-S.rect.w-2));S.rect.y=Math.round(cl(oy+dy,2,S.H-S.rect.h-2))}
+    syncBox();
+  };
+  sel.onpointerup=sel.onpointercancel=()=>{sel.onpointermove=null;clean(false)};
+};
+
+function detect(ctx,W,H){
+  const zw=Math.max(16,Math.round(W*.36)),zh=Math.max(12,Math.round(H*.18));
+  const zs=[
+    {name:"Bottom-Right",x:W-zw-Math.round(W*.01),y:H-zh-Math.round(H*.01),w:zw,h:zh},
+    {name:"Bottom-Left",x:Math.round(W*.01),y:H-zh-Math.round(H*.01),w:zw,h:zh},
+    {name:"Top-Right",x:W-zw-Math.round(W*.01),y:Math.round(H*.01),w:zw,h:zh},
+    {name:"Top-Left",x:Math.round(W*.01),y:Math.round(H*.01),w:zw,h:zh},
+    {name:"Bottom-Center",x:Math.round((W-zw)/2),y:H-zh-Math.round(H*.01),w:zw,h:zh},
+    {name:"Top-Center",x:Math.round((W-zw)/2),y:Math.round(H*.01),w:zw,h:zh}
+  ];
+  let best=zs[0],bSc=-1,tight=null;
+  for(const z of zs){
+    const d=ctx.getImageData(z.x,z.y,z.w,z.h).data;let bS=0,bC=0;
+    for(let j=0;j<z.h;j++)for(let i=0;i<z.w;i++)if(i<2||i>=z.w-2||j<2||j>=z.h-2){const p=(j*z.w+i)*4;bS+=.3*d[p]+.59*d[p+1]+.11*d[p+2];bC++}
+    const bgL=bS/Math.max(1,bC);let mX=z.w,mY=z.h,xX=0,xY=0,hits=0;
+    for(let j=2;j<z.h-2;j++)for(let i=2;i<z.w-2;i++){
+      const p=(j*z.w+i)*4,pR=p+4,pD=((j+1)*z.w+i)*4,l=.3*d[p]+.59*d[p+1]+.11*d[p+2];
+      const ed=Math.abs(l-(.3*d[pR]+.59*d[pR+1]+.11*d[pR+2]))+Math.abs(l-(.3*d[pD]+.59*d[pD+1]+.11*d[pD+2]));
+      if(ed>18&&Math.abs(l-bgL)>12){hits++;if(i<mX)mX=i;if(i>xX)xX=i;if(j<mY)mY=j;if(j>xY)xY=j}
+    }
+    const den=hits/Math.max(1,(z.w-4)*(z.h-4)),sc=(den>.002&&den<.58)?hits:hits*.15;
+    if(sc>bSc){bSc=sc;best=z;if(hits>2&&xX>=mX&&xY>=mY){const pad=6,rx=cl(z.x+mX-pad,2,W-10),ry=cl(z.y+mY-pad,2,H-10);tight={name:z.name,x:rx,y:ry,w:cl(xX-mX+pad*2,8,W-rx-2),h:cl(xY-mY+pad*2,8,H-ry-2)}}else tight={...z}}
+  }
+  return tight||best;
+}
+
+function deepCleanRegion(ctx,W,H,r){
+  const x=cl(Math.round(r.x),2,W-6),y=cl(Math.round(r.y),2,H-6),w=cl(Math.round(r.w),4,W-x-2),h=cl(Math.round(r.h),4,H-y-2);
+  const pad=6,bx=x-pad,by=y-pad,bw=w+pad*2,bh=h+pad*2,img=ctx.getImageData(bx,by,bw,bh),d=img.data,mk=new Uint8Array(bw*bh);
+  const sens=+$("sens").value||24,gAmt=(+$("grn").value||0)/100;
+  let mc=0;
+  for(let j=pad;j<bh-pad;j++){
+    const pL=(j*bw+2)*4,pR=(j*bw+(bw-3))*4,ty=(j-pad)/Math.max(1,h);
+    for(let i=pad;i<bw-pad;i++){
+      const tx=(i-pad)/Math.max(1,w),pT=(2*bw+i)*4,pB=((bh-3)*bw+i)*4;
+      const eR=((d[pL]*(1-tx)+d[pR]*tx)+(d[pT]*(1-ty)+d[pB]*ty))*.5;
+      const eG=((d[pL+1]*(1-tx)+d[pR+1]*tx)+(d[pT+1]*(1-ty)+d[pB+1]*ty))*.5;
+      const eB=((d[pL+2]*(1-tx)+d[pR+2]*tx)+(d[pT+2]*(1-ty)+d[pB+2]*ty))*.5;
+      const p=(j*bw+i)*4;
+      if(Math.abs(d[p]-eR)+Math.abs(d[p+1]-eG)+Math.abs(d[p+2]-eB)>sens){mk[j*bw+i]=1;mc++}
+    }
+  }
+  if(mc<3){for(let j=pad;j<bh-pad;j++)for(let i=pad;i<bw-pad;i++)mk[j*bw+i]=1}
+  else{
+    for(let pass=0;pass<3;pass++){
+      const cp=new Uint8Array(mk);
+      for(let j=pad;j<bh-pad;j++)for(let i=pad;i<bw-pad;i++)if(!cp[j*bw+i]&&(cp[(j-1)*bw+i]||cp[(j+1)*bw+i]||cp[j*bw+i-1]||cp[j*bw+i+1]))mk[j*bw+i]=1;
+    }
+  }
+  const origMk=new Uint8Array(mk);
+  let left=true,g=0;
+  while(left&&g++<220){
+    left=false;const nx=new Uint8Array(mk);
+    for(let j=pad;j<bh-pad;j++)for(let i=pad;i<bw-pad;i++){
+      const idx=j*bw+i;if(!mk[idx])continue;left=true;let wr=0,wg=0,wb=0,wt=0;
+      for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const n=(j+dy)*bw+(i+dx);if(!mk[n]){const wv=(!dx||!dy)?1.55:.8,p=n*4;wr+=d[p]*wv;wg+=d[p+1]*wv;wb+=d[p+2]*wv;wt+=wv}}
+      if(wt>0){const gn=(((i*73+j*151)&15)-7.5)*gAmt,p=idx*4;d[p]=cl(Math.round(wr/wt+gn),0,255);d[p+1]=cl(Math.round(wg/wt+gn),0,255);d[p+2]=cl(Math.round(wb/wt+gn),0,255);nx[idx]=0}
+    }
+    mk.set(nx);
+  }
+  for(let s=0;s<2;s++){
+    for(let j=pad;j<bh-pad;j++)for(let i=pad;i<bw-pad;i++){
+      const idx=j*bw+i;if(!origMk[idx])continue;const p=idx*4,pU=((j-1)*bw+i)*4,pD=((j+1)*bw+i)*4,pL=(j*bw+i-1)*4,pR=(j*bw+i+1)*4;
+      d[p]=Math.round((d[p]*2+d[pU]+d[pD]+d[pL]+d[pR])/6);
+      d[p+1]=Math.round((d[p+1]*2+d[pU+1]+d[pD+1]+d[pL+1]+d[pR+1])/6);
+      d[p+2]=Math.round((d[p+2]*2+d[pU+2]+d[pD+2]+d[pL+2]+d[pR+2])/6);
+    }
+  }
+  ctx.putImageData(img,bx,by);
+}
+
+$("fIn").onchange=e=>{
+  const f=e.target.files&&e.target.files[0];if(!f)return;if(S.url)URL.revokeObjectURL(S.url);
+  S.file=f;S.url=URL.createObjectURL(f);$("fInf").textContent="📁 "+f.name+" ("+(f.size/1048576).toFixed(2)+" MB)";
+  $("work").classList.remove("hide");$("res").classList.add("hide");pImg.classList.remove("vis");pVid.classList.remove("vis");outC.classList.remove("vis");
+  if(S.mode==="photo"){
+    pImg.onload=()=>{S.W=pImg.naturalWidth;S.H=pImg.naturalHeight;$("dim").textContent=S.W+"×"+S.H;clean(true)};pImg.src=S.url;pImg.classList.add("vis");
+  }else{
+    pVid.onloadeddata=()=>{const sc=Math.min(1,1920/Math.max(pVid.videoWidth,pVid.videoHeight));S.W=Math.max(2,Math.round(pVid.videoWidth*sc)&~1);S.H=Math.max(2,Math.round(pVid.videoHeight*sc)&~1);$("dim").textContent=S.W+"×"+S.H;clean(true)};pVid.src=S.url;pVid.classList.add("vis");
+  }
+};
+$("bRun").onclick=()=>clean(true);$("bRst").onclick=()=>{$("work").classList.add("hide");$("res").classList.add("hide");$("fIn").value=""};
+
+async function clean(auto){
+  if(!S.url||!S.W)return;
+  if(S.mode==="photo"){
+    beam.classList.remove("hide");$("zLbl").textContent="🔍 Deep Scanning Image...";
+    await new Promise(r=>setTimeout(r,350));
+    outC.width=S.W;outC.height=S.H;const ctx=outC.getContext("2d",{willReadFrequently:true});ctx.drawImage(pImg,0,0,S.W,S.H);
+    if(auto){S.rect=detect(ctx,S.W,S.H);$("zLbl").textContent="✅ Deep Scan + Clean: "+S.rect.name}
+    deepCleanRegion(ctx,S.W,S.H,S.rect);beam.classList.add("hide");pImg.classList.remove("vis");outC.classList.add("vis");requestAnimationFrame(syncBox);
+    const u=outC.toDataURL("image/png");$("res").classList.remove("hide");$("rMed").innerHTML=`<img src="${u}">`;
+    $("dl").href=u;$("dl").download=(S.file.name.replace(/\.[^.]+$/,"")||"photo")+"_clean.png";return;
+  }
+  const id=++S.runId;$("pArea").classList.remove("hide");$("res").classList.add("hide");beam.classList.remove("hide");let ac=null,wl=null,rec=null;
+  const stop=()=>{beam.classList.add("hide");try{ac&&ac.close()}catch(_){}try{wl&&wl.release()}catch(_){}};
+  try{
+    $("stTxt").textContent="🔍 चरण 1/2: वीडियो के हर कोने का डीप स्कैन हो रहा है…";$("pBar").style.width="4%";
+    const v=document.createElement("video");v.src=S.url;v.playsInline=true;v.preload="auto";
+    await new Promise((ok,no)=>{v.onloadeddata=ok;v.onerror=()=>no(new Error("Video error"))});if(id!==S.runId){stop();return}
+    outC.width=S.W;outC.height=S.H;const ctx=outC.getContext("2d",{willReadFrequently:true});ctx.drawImage(v,0,0,S.W,S.H);
+    await new Promise(r=>setTimeout(r,450));
+    if(auto){S.rect=detect(ctx,S.W,S.H);$("zLbl").textContent="🔍 Live Scan + Clean: "+S.rect.name}
+    pVid.classList.remove("vis");outC.classList.add("vis");requestAnimationFrame(syncBox);
+    const st=outC.captureStream(30);
+    if($("aChk").checked){try{ac=new(window.AudioContext||window.webkitAudioContext)();const s=ac.createMediaElementSource(v),d=ac.createMediaStreamDestination();s.connect(d);d.stream.getAudioTracks().forEach(t=>st.addTrack(t));await ac.resume()}catch(_){}}
+    const mt=["video/mp4;codecs=avc1.42E01E,mp4a.40.2","video/mp4","video/webm;codecs=vp9,opus","video/webm"].find(t=>MediaRecorder.isTypeSupported(t));
+    rec=new MediaRecorder(st,mt?{mimeType:mt,videoBitsPerSecond:7000000}:{videoBitsPerSecond:7000000});
+    const ch=[];rec.ondataavailable=e=>{if(e.data&&e.data.size)ch.push(e.data)};
+    rec.onstop=()=>{
+      stop();if(id!==S.runId)return;const tp=mt?mt.split(";")[0]:"video/webm",u=URL.createObjectURL(new Blob(ch,{type:tp}));
+      $("pBar").style.width="100%";$("stTxt").textContent="✅ डीप स्कैन और क्लीनिंग पूरी हुई!";$("res").classList.remove("hide");$("rMed").innerHTML=`<video src="${u}" controls playsinline></video>`;
+      $("dl").href=u;$("dl").download=(S.file.name.replace(/\.[^.]+$/,"")||"video")+"_clean."+(tp.includes("mp4")?"mp4":"webm");
+    };
+    try{wl=await navigator.wakeLock.request("screen")}catch(_){}
+    let on=true;
+    const loop=()=>{
+      if(!on||id!==S.runId){on=false;try{rec.state!=="inactive"&&rec.stop()}catch(_){}return}
+      ctx.drawImage(v,0,0,S.W,S.H);deepCleanRegion(ctx,S.W,S.H,S.rect);
+      const pc=v.duration?Math.min(99,Math.round(v.currentTime/v.duration*100)):0;$("pBar").style.width=pc+"%";
+      $("stTxt").textContent="🔍 एक तरफ स्कैन + दूसरी तरफ अदृश्य रिमूव… "+pc+"%";requestAnimationFrame(loop);
+    };
+    v.onended=()=>{ctx.drawImage(v,0,0,S.W,S.H);deepCleanRegion(ctx,S.W,S.H,S.rect);on=false;setTimeout(()=>{rec.state!=="inactive"&&rec.stop()},300)};
+    v.playbackRate=0.85;rec.start(800);v.currentTime=0;await v.play();loop();
+  }catch(e){stop();$("stTxt").textContent="❌ "+(e.message||"Error")}
+}
+})();
+</script>
+</body>
+  </html>
+  
