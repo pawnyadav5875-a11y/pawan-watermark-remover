@@ -1,0 +1,22 @@
+{
+  "id": "/",
+  "name": "Pawan Studio AI",
+  "short_name": "Pawan Studio",
+  "description": "Free browser-based AI photo tools: background remover, magic eraser and AI image generator.",
+  "lang": "en-IN",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#070913",
+  "theme_color": "#070913",
+  "categories": ["photo", "graphics", "productivity"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
